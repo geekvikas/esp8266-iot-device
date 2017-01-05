@@ -1,7 +1,13 @@
 #include "NTPTime.h"
 
-unsigned long  NTPTimeClass::SecsSince1900()
+  
+static const int NTP_PACKET_SIZE = 48; // NTP time stamp is in the first 48 bytes of the message
+byte packetBuffer[NTP_PACKET_SIZE]; //buffer to hold incoming and outgoing packets
+ 
+ unsigned long  NTPTimeClass::SecsSince1900()
 {
+
+  
 
   udp.begin(localPort);
 
@@ -25,14 +31,16 @@ unsigned long  NTPTimeClass::SecsSince1900()
     // combine the four bytes (two words) into a long integer
     // this is NTP time (seconds since Jan 1 1900):
     unsigned long secsSince1900 = highWord << 16 | lowWord;
-    udp.end();
+    udp.stop();
     return secsSince1900;
     
+  }
 }
 
 // send an NTP request to the time server at the given address
-unsigned long NTPTimeClass::sendNTPpacket(IPAddress& address)
-{
+unsigned long NTPTimeClass::sendNTPpacket(IPAddress& address){
+  
+
   // set all bytes in the buffer to 0
   memset(packetBuffer, 0, NTP_PACKET_SIZE);
   // Initialize values needed to form NTP request

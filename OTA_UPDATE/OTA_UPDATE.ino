@@ -1,4 +1,4 @@
-/**
+ /**
  * httpUpdateSPIFFS.ino
  *
  *  Created on: 05.12.2015
@@ -12,11 +12,11 @@
 #include <ESP8266HTTPClient.h>
 #include <ESP8266httpUpdate.h>
 
-#include "includes\NTPTime.h"
+#include "NTPTime.h"
 
 #define DEBUG Serial
 #define SLEEP_INTERVAL 5
-const String CURRENT_VERSION = "0.13";
+const String CURRENT_VERSION = "0.15";
 const String CURRENT_VERSION_FLAVOR = "BETA";
 const String CURRENT_VERSION_TIMESTAMP = "201612310545";
 const String CURRENT_VERSION_COMMENTS = "New Time Check Method";
