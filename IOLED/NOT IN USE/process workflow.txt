@@ -1,6 +1,6 @@
 Boot Process
 1) Look for "device.json" and connect to WiFi
-1) If no "device.json" is present then boot up and try to connect to default WiFi  (Phone based WiFi Hotspot) - credentials: "DevDisco" "admin@12345"
+1) If no "device.json" is present then boot up and try to connect to default WiFi  (Phone based WiFi Hotspot) - credentials: "$DEVICE_DISCOVERY$" "admin@12345"
 3) Go to https://whoami.idnno.com/ to download "device.json"
 4) device.json contains following information
 {

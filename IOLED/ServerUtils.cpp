@@ -5,6 +5,9 @@
 
 unsigned int ServerUtilsClass::GetTime()
 {
+    Logger.Debugln("Entering ServerUtilsClass::GetTime");
+    
+    Logger.Debugln("Exiting ServerUtilsClass::GetTime");
     return 0;
 }
 
@@ -12,6 +15,11 @@ unsigned int ServerUtilsClass::GetTime()
 TaskClass ServerUtilsClass::SendMessage(ClientMessageClass msg)
 {
     TaskClass t;
+    
+    Logger.Debugln("Entering ServerUtilsClass::SendMessage");
+    
+    Logger.Debugln("Exiting ServerUtilsClass::SendMessage");
+    
     return t;
 }
 

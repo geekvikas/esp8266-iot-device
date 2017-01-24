@@ -1,5 +1,6 @@
 #ifndef CLIENTMESSAGE_H
 #define CLIENTMESSAGE_H
+#include "Logger.h"
 
 enum MESSAGE{HEART_BEAT};
 

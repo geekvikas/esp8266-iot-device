@@ -1,17 +1,20 @@
 #ifndef LOGGER_H
 #define LOGGER_H
-#include "globalConstants.h"
-#include "FS.h"
+#include "GlobalConstants.h"
+#include <fs.h>
 
 class LoggerClass {
 private:
     const char* LOG_FILE_NAME = "/debug.log";
     File logFile;
-    #define DEBUG Serial
 public:
+    #define DEBUG Serial
     LoggerClass();
     ~LoggerClass();
-  	void Log(char&);
+  	void Error(const char*);
+    void Errorln(const char*);
+    void Debug(const char*);
+    void Debugln(const char*);
 };
 extern LoggerClass Logger;
 #endif

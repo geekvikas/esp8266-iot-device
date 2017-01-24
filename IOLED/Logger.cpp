@@ -15,10 +15,30 @@ LoggerClass::~LoggerClass(){
     if(logFile) logFile.close();
 }
 
-void LoggerClass::Log(char &msg)
+void LoggerClass::Debug(const char *msg)
+{
+  DEBUG.print(msg);
+}
+
+void LoggerClass::Debugln(const char *msg)
+{
+  DEBUG.println(msg);
+}
+
+
+void LoggerClass::Error(const char *msg)
 {
     if (!logFile) 
-        DEBUG.println("Failed to open log file for writing");
+        Debugln("Failed to open log file for writing");
+    else
+        logFile.print(msg);
+}
+
+
+void LoggerClass::Errorln(const char *msg)
+{
+    if (!logFile) 
+        Debugln("Failed to open log file for writing");
     else
         logFile.println(msg);
 }
