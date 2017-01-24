@@ -1,9 +1,10 @@
 /*
 */
 
+
 #include "TaskRunner.h"
 
-void TaskRunnerClass::Run()
+void TaskRunnerClass::Run(TaskClass task)
 {
 }
 

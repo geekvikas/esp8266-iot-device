@@ -3,7 +3,7 @@
 
 #include "SysUtils.h"
 
-bool SysUtilsClass::UpdateTime()
+bool SysUtilsClass::UpdateTime(unsigned int time)
 {
     return true;
 }

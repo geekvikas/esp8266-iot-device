@@ -2,8 +2,9 @@
 #define TASK_H
 
 class TaskClass {
-	public:
-	
+  public:
+    TaskClass();
+    ~TaskClass();
 };
 extern TaskClass Task;
 #endif

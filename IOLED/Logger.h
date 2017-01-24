@@ -5,12 +5,13 @@
 
 class LoggerClass {
 private:
-    LoggerClass();
     const char* LOG_FILE_NAME = "/debug.log";
     File logFile;
     #define DEBUG Serial
 public:
-	void Log(char&);
+    LoggerClass();
+    ~LoggerClass();
+  	void Log(char&);
 };
 extern LoggerClass Logger;
 #endif

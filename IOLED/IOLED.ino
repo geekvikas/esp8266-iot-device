@@ -1,4 +1,10 @@
+#include <Arduino.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
+#include <ESP8266HTTPClient.h>
+#include <ESP8266httpUpdate.h>
 #include "depends.h"
+
 
 void setup() {
     
@@ -21,6 +27,6 @@ void setup() {
 void loop() {
 
     // Send a heart beat to the server and execute the command returned by server
-    TaskRunner.Run(ServerUtils.SendCommand(Commands.HEART_BEAT));
+    TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT,'\0')));
 
 }

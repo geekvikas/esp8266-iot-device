@@ -4,7 +4,7 @@
 class ConfigClass {
 public:
 	void Init();
-	void Update();
+	bool Update();
 };
 extern ConfigClass Config;
 #endif

@@ -7,8 +7,9 @@ void ConfigClass::Init()
 {
 }
 
-void ConfigClass::Update()
+bool ConfigClass::Update()
 {
+    return true;
 }
 
 ConfigClass Config;

@@ -5,26 +5,22 @@
 
 #include "Logger.h"
 
-LoggerClass(){
+LoggerClass::LoggerClass(){
     DEBUG.begin(BAUD_RATE);
     SPIFFS.begin();
     logFile = SPIFFS.open(LOG_FILE_NAME, "w");
 }
 
-~LoggerClass(){
+LoggerClass::~LoggerClass(){
     if(logFile) logFile.close();
 }
 
-bool LoggerClass::Log(char &msg)
+void LoggerClass::Log(char &msg)
 {
-    if (!logFile) {
+    if (!logFile) 
         DEBUG.println("Failed to open log file for writing");
-        return false;
-    }
-    else{   
+    else
         logFile.println(msg);
-        return true;
-    }
 }
 
 LoggerClass Logger;
