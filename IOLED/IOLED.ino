@@ -5,11 +5,11 @@
 #include <ESP8266httpUpdate.h>
 #include "depends.h"
 
-
 void setup() {
     
     // Look up for Configuration file, if exists then load the configurations else save the default Configuration file
-    Config.Init();
+    // TODO - Remove this commend and code later. No longer required as this is handled by Constructor
+    // Config.Init(); 
 
     // Attempt to connect to WiFi from the WiFi config pool
     Network.Connect();
@@ -25,12 +25,8 @@ void setup() {
 }
 
 void loop() {
-
-    Logger.Debug("AP Name: ");
-    Logger.Debugln(Config.AP_NAME);
-    Logger.Debug("AP Pwd: ");
-    Logger.Debugln(Config.AP_PWD);
-    
+    Network.Connect();
+    ServerUtils.GetTime();
     // Send a heart beat to the server and execute the command returned by server
     TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT,'\0')));
 

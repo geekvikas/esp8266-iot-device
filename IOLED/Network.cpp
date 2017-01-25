@@ -5,7 +5,15 @@
 
 bool NetworkClass::Connect()
 {
+    
     Logger.Debugln("Entering NetworkClass::Connect");
+    
+    // Return true if its already connected
+    if(__WiFiMulti.run() == WL_CONNECTED){
+      Logger.Debugln("NetworkClass::Connect - Connected");
+      return true;
+    }
+    
     if(!Config.AP_NAME){
       Logger.Debugln("Error: Missing Network Config!");
       return false;
@@ -15,7 +23,7 @@ bool NetworkClass::Connect()
     Logger.Debugln(Config.AP_NAME);
     
     __WiFiMulti.addAP(Config.AP_NAME, Config.AP_PWD);
-    pinMode(LED_BUILTIN, OUTPUT); 
+    //pinMode(LED_BUILTIN, OUTPUT); 
     //Wait till we connect to the WiFi
     while(__WiFiMulti.run() != WL_CONNECTED) {
       Logger.Debug(".");
@@ -35,4 +43,3 @@ bool NetworkClass::Connect()
     return true;
 }
 
-NetworkClass Network;

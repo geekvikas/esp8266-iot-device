@@ -7,5 +7,4 @@ class TaskClass {
     TaskClass();
     ~TaskClass();
 };
-extern TaskClass Task;
 #endif

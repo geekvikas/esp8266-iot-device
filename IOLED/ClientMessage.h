@@ -11,5 +11,5 @@ public:
 
   ClientMessageClass Get(MESSAGE,char*);
 };
-extern ClientMessageClass ClientMessage;
+
 #endif

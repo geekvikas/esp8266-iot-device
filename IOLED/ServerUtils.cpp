@@ -5,10 +5,19 @@
 
 unsigned int ServerUtilsClass::GetTime()
 {
-    Logger.Debugln("Entering ServerUtilsClass::GetTime");
     
+    Logger.Debugln("Entering ServerUtilsClass::GetTime");
+    unsigned int retVal = 0;
+    __http.begin(Config.SERVER_TIME_URL);
+    int httpCode = __http.GET();
+    if(httpCode == HTTP_CODE_OK) {
+        String payload = __http.getString();
+        if(payload) 
+          retVal = atol(payload.c_str());
+    }
+    __http.end();
     Logger.Debugln("Exiting ServerUtilsClass::GetTime");
-    return 0;
+    return retVal;
 }
 
 
@@ -23,4 +32,4 @@ TaskClass ServerUtilsClass::SendMessage(ClientMessageClass msg)
     return t;
 }
 
-ServerUtilsClass ServerUtils;
+

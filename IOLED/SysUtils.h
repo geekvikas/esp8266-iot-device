@@ -6,5 +6,5 @@ class SysUtilsClass {
 public:
 	bool UpdateTime(unsigned int);
 };
-extern SysUtilsClass SysUtils;
+
 #endif

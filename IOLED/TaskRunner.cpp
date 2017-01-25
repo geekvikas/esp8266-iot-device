@@ -10,5 +10,3 @@ void TaskRunnerClass::Run(TaskClass task)
     
     Logger.Debugln("Exiting TaskRunnerClass::Run");    
 }
-
-TaskRunnerClass TaskRunner;

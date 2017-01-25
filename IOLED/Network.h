@@ -10,5 +10,5 @@ private:
 public:
 	bool Connect();
 };
-extern NetworkClass Network;
+
 #endif

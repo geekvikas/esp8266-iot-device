@@ -39,14 +39,19 @@ bool ConfigClass::__LoadConfig()
 
   AP_NAME = json["apName"];
   AP_PWD = json["apPwd"];
+  SERVER_TIME_URL = json["serverTimeUrl"];
 
-  // Real world application would store these values in some variables for
-  // later use.
-
+  if(!(AP_NAME || AP_PWD || SERVER_TIME_URL)){
+    Logger.Debugln("Unable to find the expected settings in config file");
+    return false;
+  }
+    
   Logger.Debug("Loaded AP Name: ");
   Logger.Debugln(AP_NAME);
   Logger.Debug("Loaded AP Password: ");
   Logger.Debugln(AP_PWD);
+  Logger.Debug("Server Time URL: ");
+  Logger.Debugln(SERVER_TIME_URL);
 
   Logger.Debugln("Exiting ConfigClass::__LoadConfig");
   
@@ -60,6 +65,7 @@ bool ConfigClass::__SaveDefaultConfig(){
   JsonObject& json = jsonBuffer.createObject();
   json["apName"] = __AP_NAME;
   json["apPwd"] = __AP_PWD;
+  json["serverTimeUrl"] = __SERVER_TIME_URL;
 
   File configFile = SPIFFS.open(CONFIG_FILE_NAME, "w");
   if (!configFile) {
@@ -72,16 +78,16 @@ bool ConfigClass::__SaveDefaultConfig(){
   return true;
 }
 
-void ConfigClass::Init()
+ConfigClass::ConfigClass()
 {
-  Logger.Debugln("Entering ConfigClass::Init");
+  Logger.Debugln("Entering ConfigClass::Constructor");
   if(!__LoadConfig()){
     Logger.Debugln("ConfigClass::Init - Missing Config. Saving Default Config");
     __SaveDefaultConfig();
     __LoadConfig();
   }
   
-  Logger.Debugln("Exiting ConfigClass::Init");
+  Logger.Debugln("Exiting ConfigClass::Constructor");
   
 }
 
@@ -93,4 +99,4 @@ bool ConfigClass::Update()
     return false;
 }
 
-ConfigClass Config;
+

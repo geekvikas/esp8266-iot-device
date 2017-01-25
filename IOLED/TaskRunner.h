@@ -7,5 +7,4 @@ class TaskRunnerClass {
 public:
 	void Run(TaskClass);
 };
-extern TaskRunnerClass TaskRunner;
 #endif

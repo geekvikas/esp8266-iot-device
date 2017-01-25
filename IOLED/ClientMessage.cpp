@@ -11,5 +11,4 @@ ClientMessageClass ClientMessageClass::Get(MESSAGE msg ,char* data){
    return *cmsg;
 }
 
-ClientMessageClass ClientMessage;
 
