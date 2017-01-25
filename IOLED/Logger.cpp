@@ -43,4 +43,3 @@ void LoggerClass::Errorln(const char *msg)
         logFile.println(msg);
 }
 
-LoggerClass Logger;

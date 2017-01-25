@@ -4,6 +4,7 @@
 #include "Logger.h"
 
 class TaskRunnerClass {
+
 public:
 	void Run(TaskClass);
 };

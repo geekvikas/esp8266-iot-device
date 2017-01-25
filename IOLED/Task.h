@@ -3,6 +3,7 @@
 #include "Logger.h"
 
 class TaskClass {
+
   public:
     TaskClass();
     ~TaskClass();

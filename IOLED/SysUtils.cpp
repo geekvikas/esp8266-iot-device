@@ -5,9 +5,9 @@
 
 bool SysUtilsClass::UpdateTime(unsigned int time)
 {
-    Logger.Debugln("Entering SysUtilsClass::UpdateTime");
+    LoggerClass::Instance()->Debugln("Entering SysUtilsClass::UpdateTime");
     
-    Logger.Debugln("Exiting SysUtilsClass::UpdateTime");
+    LoggerClass::Instance()->Debugln("Exiting SysUtilsClass::UpdateTime");
     return true;
 }
 
