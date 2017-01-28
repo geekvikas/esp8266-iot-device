@@ -1,5 +1,6 @@
 #include "Network.h"
 
+
 bool NetworkClass::Connect()
 {
     
@@ -7,13 +8,15 @@ bool NetworkClass::Connect()
     
     // Return true if its already connected
     if(__WiFiMulti.run() == WL_CONNECTED){
+      IsConnected = true;
       LoggerClass::Instance()->Debugln("NetworkClass::Connect - Connected");
-      return true;
+      return IsConnected;
     }
     
     if(!ConfigClass::Instance()->Get("apName")){
+      IsConnected = false;
       LoggerClass::Instance()->Debugln("Error: Missing Network Config!");
-      return false;
+      return IsConnected;
     }
 
     LoggerClass::Instance()->Debug("Trying to connect to ...");
@@ -32,11 +35,18 @@ bool NetworkClass::Connect()
     }
 
     if(__WiFiMulti.run() == WL_CONNECTED){
+      IsConnected = true;
       LoggerClass::Instance()->Debugln("Connected to WiFi");
       digitalWrite(LED_BUILTIN, LOW);  // Turn the LED on by making the voltage LOW to show that we are connected now
     }
-    
+    else
+      IsConnected = false;
+
+    // If the current configuration has DEFAULT AP NAME or not Connected to WiFi then set the IsDefaultAP = true
+    if(ConfigClass::Instance()->Get("apName") == ConfigClass::Instance().DEFAULT_AP_NAME || (!IsConnected))
+      IsDefaultAP = true;
+
     LoggerClass::Instance()->Debugln("Exiting NetworkClass::Connect");
-    return true;
+    return IsConnected;
 }
 

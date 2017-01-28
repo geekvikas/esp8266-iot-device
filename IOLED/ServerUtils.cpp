@@ -3,19 +3,18 @@
 
 #include "ServerUtils.h"
 
-const char* ServerUtilsClass::GetTime()
+unsigned int ServerUtilsClass::GetTime()
 {
     
     LoggerClass::Instance()->Debugln("Entering ServerUtilsClass::GetTime");
-    const char* retVal = '\0';
+    unsigned int retVal  = 0;
     LoggerClass::Instance()->Debugln(ConfigClass::Instance()->Get("serverTimeUrl"));
     __http.begin(ConfigClass::Instance()->Get("serverTimeUrl"));
     int httpCode = __http.GET();
     if(httpCode == HTTP_CODE_OK) {
         String payload = __http.getString();
         if(payload) 
-          retVal = payload.c_str();
-        LoggerClass::Instance()->Debugln(retVal);
+          retVal = atol(payload.c_str());
         
     }
     __http.end();

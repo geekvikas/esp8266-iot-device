@@ -9,6 +9,8 @@ private:
   ESP8266WiFiMulti __WiFiMulti;
 public:
 	bool Connect();
+  bool IsConnected;
+  bool IsDefaultAP;
 };
 
 #endif

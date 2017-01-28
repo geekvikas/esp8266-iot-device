@@ -12,7 +12,6 @@ private:
     static ConfigClass *s_instance;
     LoggerClass Logger;
     const char* CONFIG_FILE_NAME = "/device2.json";
-    const char* __AP_NAME = "$DEVICE_DISCOVERY$";
     const char* __AP_PWD = "admin@12345";
     const char* __SERVER_TIME_URL = "http://172.20.10.4:3000/api/getTime";
     bool __IsValid();
@@ -20,7 +19,8 @@ private:
     
     
 public:
-   
+   const char* DEFAULT_AP_NAME = "$DEVICE_DISCOVERY$";
+    
    static ConfigClass *Instance()
     {
         if (!s_instance)

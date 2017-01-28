@@ -20,7 +20,7 @@ bool ConfigClass::__SaveDefaultConfig(){
   LoggerClass::Instance()->Debugln("Entering ConfigClass::__SaveDefaultConfig");
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& json = jsonBuffer.createObject();
-  json["apName"] = __AP_NAME;
+  json["apName"] = DEFAULT_AP_NAME;
   json["apPwd"] = __AP_PWD;
   json["serverTimeUrl"] = __SERVER_TIME_URL;
 
