@@ -20,9 +20,9 @@ bool Config::__SaveDefaultConfig(){
   Logger::Instance()->Debugln("Entering Config::__SaveDefaultConfig");
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& json = jsonBuffer.createObject();
-  json["apName"] = DEFAULT_AP_NAME;
-  json["apPwd"] = __AP_PWD;
-  json["serverTimeUrl"] = __SERVER_TIME_URL;
+  json[CONFIG_VALUE[CONFIG_KEY::AP_NAME]] = DEFAULT_AP_NAME;
+  json[CONFIG_VALUE[CONFIG_KEY::AP_KEY]] = DEFAULT_AP_KEY;
+  json[CONFIG_VALUE[CONFIG_KEY::EP_URL]] = DEFAULT_EP_URL;
 
   File configFile = SPIFFS.open(CONFIG_FILE_NAME, "w");
   if (!configFile) {
@@ -35,7 +35,7 @@ bool Config::__SaveDefaultConfig(){
   return true;
 }
 
-const char* Config::Get(const char* configName)
+const char* Config::Get(CONFIG_KEY configKey)
 {
   
   Logger::Instance()->Debugln("Entering Config::Get");
@@ -73,8 +73,8 @@ const char* Config::Get(const char* configName)
     Logger::Instance()->Debugln("Failed to parse config file");
     return '\0';
   }
-
-  return jsonObject[configName];
+  
+  return jsonObject[CONFIG_VALUE[configKey]];
     
 }
 

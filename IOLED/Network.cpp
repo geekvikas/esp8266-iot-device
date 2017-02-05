@@ -17,16 +17,16 @@ bool NetworkClass::Connect()
       return IsConnected;
     }
     
-    if(!Config::Instance()->Get("apName")){
+    if(!Config::Instance()->Get(CONFIG_KEY::AP_NAME)){
       IsConnected = false;
       Logger::Instance()->Debugln("Error: Missing Network Config!");
       return IsConnected;
     }
 
     Logger::Instance()->Debug("Trying to connect to ...");
-    Logger::Instance()->Debugln(Config::Instance()->Get("apName"));
+    Logger::Instance()->Debugln(Config::Instance()->Get(CONFIG_KEY::AP_NAME));
     
-    __WiFiMulti.addAP(Config::Instance()->Get("apName"), Config::Instance()->Get("apPwd"));
+    __WiFiMulti.addAP(Config::Instance()->Get(CONFIG_KEY::AP_NAME), Config::Instance()->Get(CONFIG_KEY::AP_KEY));
     //Wait till we connect to the WiFi
     while(__WiFiMulti.run() != WL_CONNECTED) {
       Logger::Instance()->Debug(".");
@@ -47,7 +47,7 @@ bool NetworkClass::Connect()
       IsConnected = false;
 
     // If the current configuration has DEFAULT AP NAME or not Connected to WiFi then set the IsDefaultAP = true
-    if(Config::Instance()->Get("apName") == Config::Instance()->DEFAULT_AP_NAME || (!IsConnected))
+    if(Config::Instance()->Get(CONFIG_KEY::AP_NAME) == Config::Instance()->DEFAULT_AP_NAME || (!IsConnected))
       IsDefaultAP = true;
 
     

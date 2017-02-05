@@ -4,12 +4,21 @@
 #include "Task.h"
 #include "Logger.h"  
 #include "Config.h"  
-#include <ESP8266HTTPClient.h>
+#include "Device.h"  
+#include "DeviceInfo.h"  
+#include "Http.h"
 
-class ServerUtilsClass {
+class ServerUtils {
 private:
   HTTPClient __http;
+	static ServerUtils *s_instance;
 public:
+	static ServerUtils *Instance()
+	{
+			if (!s_instance)
+				s_instance = new ServerUtils;
+			return s_instance;
+	}
 	unsigned int GetTime();
  	TaskClass SendMessage(ClientMessageClass);
 };

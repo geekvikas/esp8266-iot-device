@@ -2,34 +2,38 @@
 */
 
 #include "ServerUtils.h"
+Http *Http::s_instance = 0;
 
-unsigned int ServerUtilsClass::GetTime()
-{
+// unsigned int ServerUtils::GetTime()
+// {
     
-    Logger::Instance()->Debugln("Entering ServerUtilsClass::GetTime");
-    unsigned int retVal  = 0;
-    Logger::Instance()->Debugln(Config::Instance()->Get("serverTimeUrl"));
-    __http.begin(Config::Instance()->Get("serverTimeUrl"));
-    int httpCode = __http.GET();
-    if(httpCode == HTTP_CODE_OK) {
-        String payload = __http.getString();
-        if(payload) 
-          retVal = atol(payload.c_str());
-        
-    }
-    __http.end();
-    Logger::Instance()->Debugln("Exiting ServerUtilsClass::GetTime");
-    return retVal;
-}
+//     Logger::Instance()->Debugln("Entering ServerUtils::GetTime");
+//     unsigned int retVal  = 0;
+//     Logger::Instance()->Debugln(Config::Instance()->Get(CONFIG_KEY::EP_URL));
+    
+//     String payload = Http::Instance()->Get(Config::Instance()->Get(CONFIG_KEY::EP_URL));
+//     if(payload) 
+//         retVal = atol(payload.c_str());
+
+//     Logger::Instance()->Debugln("Exiting ServerUtils::GetTime");
+//     return retVal;
+// }
 
 
-TaskClass ServerUtilsClass::SendMessage(ClientMessageClass msg)
+TaskClass ServerUtils::SendMessage(ClientMessageClass msg)
 {
     TaskClass t;
+    String devInfo = DEVICE_VERSION_INFO;
+    devInfo.replace("DEVICE_INFO_PLACEHOLDER",Device::Instance()->GetDeviceInfo());
+
+
+
+    Logger::Instance()->Debugln("Entering ServerUtils::SendMessage");
+
     
-    Logger::Instance()->Debugln("Entering ServerUtilsClass::SendMessage");
-    
-    Logger::Instance()->Debugln("Exiting ServerUtilsClass::SendMessage");
+    Http::Instance()->Post(Config::Instance()->Get(CONFIG_KEY::EP_URL),devInfo);
+
+    Logger::Instance()->Debugln("Exiting ServerUtils::SendMessage");
     
     return t;
 }

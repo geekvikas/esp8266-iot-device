@@ -2,7 +2,7 @@
 #define CLIENTMESSAGE_H
 #include "Logger.h"
 
-enum MESSAGE{HEART_BEAT};
+enum MESSAGE{HEART_BEAT,REGISTER};
 
 class ClientMessageClass {
 public:

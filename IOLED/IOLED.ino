@@ -11,13 +11,14 @@
 ClientMessageClass ClientMessage;
 NetworkClass Network;
 SysUtilsClass SysUtils;
-ServerUtilsClass ServerUtils;
+//ServerUtilsClass ServerUtils;
 TaskRunnerClass TaskRunner;
 
 // These are singleton objects to keep the single copy of Configuration in memory 
 Logger *Logger::s_instance = 0;
 Config *Config::s_instance = 0;
 Device *Device::s_instance = 0;
+ServerUtils *ServerUtils::s_instance = 0;
 
 const int FAIL_REGISTER_SLEEP_INTERVAL = 10 * 1000; // 10 Seconds
 
@@ -98,7 +99,7 @@ void loop() {
         Logger::Instance()->Debugln(Device::Instance()->DeviceId);
 
         // Send a heart beat to the server and execute the command returned by server
-        TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
+        TaskRunner.Run(ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
         delay(Device::Instance()->HeartBeatInterval);
     }
     else{
