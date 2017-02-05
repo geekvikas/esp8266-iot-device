@@ -13,6 +13,7 @@ private:
   	HTTPClient __http;
 	static ServerUtils *s_instance;
 	String GenerateMessage(ClientMessageClass);
+	TaskClass JsonToTask(String);
 public:
 	static ServerUtils *Instance()
 	{

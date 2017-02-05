@@ -12,14 +12,6 @@ void TaskRunnerClass::Run(TaskClass task)
     Logger::Instance()->Debugln("Entering TaskRunnerClass::Run");
     switch(task.type){
 
-        case TASK::NOP:
-            // No operation is required, continue in next loop
-            // Not recommended, sleep atleast minimum interval
-            Logger::Instance()->Debugln("NOP Received...going to quick snooze");
-            delay(MIN_SLEEP_TIME);      
-            Logger::Instance()->Debugln("Woke up from NOP snooze");
-            break;
-
         case TASK::FWUPDATE:
             Logger::Instance()->Debugln("FW Update Required");
             // TODO : Update the FW
@@ -45,6 +37,23 @@ void TaskRunnerClass::Run(TaskClass task)
             Logger::Instance()->Debugln("LED Command received");
             // TODO : LED Control Logic here
             break;
+
+        case TASK::NOP:
+            // No operation is required, continue in next loop
+            // Not recommended, sleep atleast minimum interval
+            Logger::Instance()->Debugln("NOP Received...going to quick snooze");
+            delay(MIN_SLEEP_TIME);      
+            Logger::Instance()->Debugln("Woke up from NOP snooze");
+            break;
+
+        default:
+            // No operation is required, continue in next loop
+            // Not recommended, sleep atleast minimum interval
+            Logger::Instance()->Debugln("No Response Received...going to quick snooze");
+            delay(MIN_SLEEP_TIME);      
+            Logger::Instance()->Debugln("Woke up...");
+            break;
+
     }
     Logger::Instance()->Debugln("Exiting TaskRunnerClass::Run");    
 }

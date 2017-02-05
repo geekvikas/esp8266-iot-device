@@ -11,5 +11,6 @@ class TaskClass {
     TASK type;
     String data;
     int value;
+    String ToString(TASK);
 };
 #endif

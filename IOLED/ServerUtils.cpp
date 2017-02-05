@@ -37,17 +37,48 @@ TaskClass ServerUtils::SendMessage(ClientMessageClass msg)
 
     Logger::Instance()->Debugln("Server Response: "  + response);
     
-    if(response == "{\"result\": \"success\"}"){
-        t.type = TASK::SLEEP;
-        t.value = 10000;
-    }
-        
+    t = JsonToTask(response);    
 
     Logger::Instance()->Debugln("Exiting ServerUtils::SendMessage");
     
     return t; 
 }
 
+TaskClass ServerUtils::JsonToTask(String json){
+    StaticJsonBuffer<200> jsonBuffer;
+    JsonObject& root = jsonBuffer.parseObject(json);
+    TaskClass retTask;
+    String taskType;
+    if(root["status"]=="success")
+    {
+        retTask.data = String((const char *)root["message"]["data"]);
+        retTask.value = root["message"]["value"];
+        taskType = String(root["message"]["type"]);
+        switch(taskType){
+            
+            /*case retTask.ToString(TASK::FWUPDATE):
+                retTask.type = TASK::FWUPDATE;
+            break;
+            
+            case TASK::LED:
+                retTask.type = TASK::LED;
+            break;
+            
+            case TASK::REBOOT:
+                retTask.type = TASK::REBOOT;
+            break;
+            */
+            case String("SLEEP"):
+                retTask.type = TASK::SLEEP;
+            break;
+            
+            case String("NOP"):
+            default:
+                retTask.type = TASK::NOP;
+        }
+    }
+    return retTask;
+}
 
 String ServerUtils::GenerateMessage(ClientMessageClass m){
 
