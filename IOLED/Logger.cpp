@@ -5,28 +5,32 @@
 
 #include "Logger.h"
 
-LoggerClass::LoggerClass(){
+Logger::Logger(){
     DEBUG.begin(BAUD_RATE);
     SPIFFS.begin();
     logFile = SPIFFS.open(LOG_FILE_NAME, "w");
 }
 
-LoggerClass::~LoggerClass(){
+Logger::~Logger(){
     if(logFile) logFile.close();
 }
 
-void LoggerClass::Debug(const char *msg)
+void Logger::Debug(const char *msg)
 {
   DEBUG.print(msg);
 }
 
-void LoggerClass::Debugln(const char *msg)
+void Logger::Debugln(const char *msg)
 {
   DEBUG.println(msg);
 }
 
+void Logger::Debugln(String msg)
+{
+  DEBUG.println(msg);
+}
 
-void LoggerClass::Error(const char *msg)
+void Logger::Error(const char *msg)
 {
     if (!logFile) 
         Debugln("Failed to open log file for writing");
@@ -35,7 +39,7 @@ void LoggerClass::Error(const char *msg)
 }
 
 
-void LoggerClass::Errorln(const char *msg)
+void Logger::Errorln(const char *msg)
 {
     if (!logFile) 
         Debugln("Failed to open log file for writing");

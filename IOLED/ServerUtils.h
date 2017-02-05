@@ -10,7 +10,7 @@ class ServerUtilsClass {
 private:
   HTTPClient __http;
 public:
-	const char* GetTime();
+	unsigned int GetTime();
  	TaskClass SendMessage(ClientMessageClass);
 };
 

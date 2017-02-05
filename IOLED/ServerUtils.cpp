@@ -6,10 +6,10 @@
 unsigned int ServerUtilsClass::GetTime()
 {
     
-    LoggerClass::Instance()->Debugln("Entering ServerUtilsClass::GetTime");
+    Logger::Instance()->Debugln("Entering ServerUtilsClass::GetTime");
     unsigned int retVal  = 0;
-    LoggerClass::Instance()->Debugln(ConfigClass::Instance()->Get("serverTimeUrl"));
-    __http.begin(ConfigClass::Instance()->Get("serverTimeUrl"));
+    Logger::Instance()->Debugln(Config::Instance()->Get("serverTimeUrl"));
+    __http.begin(Config::Instance()->Get("serverTimeUrl"));
     int httpCode = __http.GET();
     if(httpCode == HTTP_CODE_OK) {
         String payload = __http.getString();
@@ -18,7 +18,7 @@ unsigned int ServerUtilsClass::GetTime()
         
     }
     __http.end();
-    LoggerClass::Instance()->Debugln("Exiting ServerUtilsClass::GetTime");
+    Logger::Instance()->Debugln("Exiting ServerUtilsClass::GetTime");
     return retVal;
 }
 
@@ -27,9 +27,9 @@ TaskClass ServerUtilsClass::SendMessage(ClientMessageClass msg)
 {
     TaskClass t;
     
-    LoggerClass::Instance()->Debugln("Entering ServerUtilsClass::SendMessage");
+    Logger::Instance()->Debugln("Entering ServerUtilsClass::SendMessage");
     
-    LoggerClass::Instance()->Debugln("Exiting ServerUtilsClass::SendMessage");
+    Logger::Instance()->Debugln("Exiting ServerUtilsClass::SendMessage");
     
     return t;
 }

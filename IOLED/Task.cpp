@@ -5,16 +5,16 @@
 
 TaskClass::TaskClass()
 {
-    LoggerClass::Instance()->Debugln("Entering TaskClass::TaskClass");
+    Logger::Instance()->Debugln("Entering TaskClass::TaskClass");
     
-    LoggerClass::Instance()->Debugln("Exiting TaskClass::TaskClass");
+    Logger::Instance()->Debugln("Exiting TaskClass::TaskClass");
   
 }
 
 TaskClass::~TaskClass()
 {
-    LoggerClass::Instance()->Debugln("Entering TaskClass::~TaskClass");
+    Logger::Instance()->Debugln("Entering TaskClass::~TaskClass");
     
-    LoggerClass::Instance()->Debugln("Exiting TaskClass::~TaskClass");  
+    Logger::Instance()->Debugln("Exiting TaskClass::~TaskClass");  
 }
 

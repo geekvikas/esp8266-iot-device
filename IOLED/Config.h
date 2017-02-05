@@ -5,12 +5,11 @@
 #include "Logger.h"
 //#include "Network.h"
 
-class ConfigClass {
+class Config {
     
 
 private:
-    static ConfigClass *s_instance;
-    LoggerClass Logger;
+    static Config *s_instance;
     const char* CONFIG_FILE_NAME = "/device2.json";
     const char* __AP_PWD = "admin@12345";
     const char* __SERVER_TIME_URL = "http://172.20.10.4:3000/api/getTime";
@@ -21,10 +20,10 @@ private:
 public:
    const char* DEFAULT_AP_NAME = "$DEVICE_DISCOVERY$";
     
-   static ConfigClass *Instance()
+   static Config *Instance()
     {
         if (!s_instance)
-          s_instance = new ConfigClass;
+          s_instance = new Config;
         return s_instance;
     }
   const char* Get(const char*);

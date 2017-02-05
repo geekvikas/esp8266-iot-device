@@ -10,6 +10,7 @@ public:
   char* data; 
 
   ClientMessageClass Get(MESSAGE,char*);
+  ClientMessageClass Get(MESSAGE);
 };
 
 #endif

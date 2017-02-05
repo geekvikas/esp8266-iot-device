@@ -4,6 +4,7 @@
 #include "SysUtils.h"
 #include "ServerUtils.h"
 #include "TaskRunner.h"
+#include "Device.h"
 #include "Logger.h"
 
 // Local variables objects utilized in the sketch
@@ -14,14 +15,17 @@ ServerUtilsClass ServerUtils;
 TaskRunnerClass TaskRunner;
 
 // These are singleton objects to keep the single copy of Configuration in memory 
-LoggerClass *LoggerClass::s_instance = 0;
-ConfigClass *ConfigClass::s_instance = 0;
+Logger *Logger::s_instance = 0;
+Config *Config::s_instance = 0;
+Device *Device::s_instance = 0;
+
+const int FAIL_REGISTER_SLEEP_INTERVAL = 10 * 1000; // 10 Seconds
 
 /*
 Subroutine:     setup()
 Purpose:        This is the entry point in Arduino to initialize the device and setup some ground rules
                 Steps Taken
-                ===========
+                ===========12.5
                 1) Call Network.Connect()
                     a. Network.Connect() checks for available Configuration on the SPIFFS system
                     b. If no configuration found then Device tries to connect to DEFAULT WiFi AP ($DEVICE_DISCOVERY$ with passkey= admin@12345)
@@ -30,6 +34,7 @@ Purpose:        This is the entry point in Arduino to initialize the device and 
 */
 
 void setup() {
+    //pinMode(LED_BUILTIN, OUTPUT); 
     // Attempt to connect to WiFi from the WiFi config pool defined in the device.json
     while(!Network.IsConnected)
         Network.Connect();
@@ -55,30 +60,50 @@ Purpose:        This is the main "loop" subroutine which is at the heart of the 
 
 void loop() {
 
-    if(!Network.IsConnected)
+    // // Check if still connected, otherwise attempt to reconnect
+    // if(!Network.IsConnected){
+    //     Network.Connect();
+    // }
+    // // In case its already connected
+    // else{
+    //     // Look up for latest config from the server and update the local config file
+    //     // If new Config file found then reconnect the Network with updated config file
+    //     if(ConfigClass::Instance()->Update()){
+    //         LoggerClass::Instance()->Debugln("Configuration changed, reconnecting...");
+    //         Network.Connect();
+    //     }
+    //     else{
+    //       LoggerClass::Instance()->Debugln("Configuration unchanged...");
+    //     }
+      
+    //     // Update the System time from the server
+    //     unsigned int serverTime = ServerUtils.GetTime();
 
+        
+    //     // If valid time is returned from the server
+    //     if(serverTime>0){
+    //         SysUtils.UpdateTime(serverTime);
+    //         LoggerClass::Instance()->Debugln("Change in server time detected, local time updated...");
+    //     }
 
-        // Look up for latest config from the server and upload the local config file
-        // If new Config file found then reconnect the Network with updated config file
-        if(ConfigClass::Instance()->Update())
-            Network.Connect();
-    // Update the System time from the server
-    unsigned int serverTime = atoi(ServerUtils.GetTime());
-    
-    // If valid time is returned from the server
-    if(serverTime>0)
-        SysUtils.UpdateTime(serverTime);
+    //     // Send a heart beat to the server and execute the command returned by server
+    //     TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
+     
+    // }
 
+    // Check if Device is registered to server and has valid DeviceId
+    // Sleep for 10 seconds and Exit loop() in case of failure to register 
+    if(Device::Instance()->Register()){
+        Logger::Instance()->Debug("Device Id: ");
+        Logger::Instance()->Debugln(Device::Instance()->DeviceId);
 
-
-    unsigned int timeVal;
-    
-    Network.Connect();
-    timeVal = ServerUtils.GetTime();
-    
-    LoggerClass::Instance()->Debugln(itoa(timeVal));
-
-    // Send a heart beat to the server and execute the command returned by server
-    TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT,'\0')));
+        // Send a heart beat to the server and execute the command returned by server
+        TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
+        delay(Device::Instance()->HeartBeatInterval);
+    }
+    else{
+        delay(FAIL_REGISTER_SLEEP_INTERVAL);
+        return;
+    }
 
 }

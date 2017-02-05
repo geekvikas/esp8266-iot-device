@@ -6,7 +6,7 @@
 
 void TaskRunnerClass::Run(TaskClass task)
 {
-    LoggerClass::Instance()->Debugln("Entering TaskRunnerClass::Run");
+    Logger::Instance()->Debugln("Entering TaskRunnerClass::Run");
     
-    LoggerClass::Instance()->Debugln("Exiting TaskRunnerClass::Run");    
+    Logger::Instance()->Debugln("Exiting TaskRunnerClass::Run");    
 }

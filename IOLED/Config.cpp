@@ -1,23 +1,23 @@
 #include "Config.h"
 
-bool ConfigClass::__IsValid()
+bool Config::__IsValid()
 {
-  LoggerClass::Instance()->Debugln("Entering ConfigClass::__IsValid");
+  Logger::Instance()->Debugln("Entering Config::__IsValid");
    
   File configFile = SPIFFS.open(CONFIG_FILE_NAME, "r");
   if (!configFile) {
-    LoggerClass::Instance()->Debugln("Failed to open config file");
+    Logger::Instance()->Debugln("Failed to open config file");
     return false;
   }
     
-  LoggerClass::Instance()->Debugln("Exiting ConfigClass::__IsValid");
+  Logger::Instance()->Debugln("Exiting Config::__IsValid");
   
   return true;
   
 }
 
-bool ConfigClass::__SaveDefaultConfig(){
-  LoggerClass::Instance()->Debugln("Entering ConfigClass::__SaveDefaultConfig");
+bool Config::__SaveDefaultConfig(){
+  Logger::Instance()->Debugln("Entering Config::__SaveDefaultConfig");
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& json = jsonBuffer.createObject();
   json["apName"] = DEFAULT_AP_NAME;
@@ -26,34 +26,34 @@ bool ConfigClass::__SaveDefaultConfig(){
 
   File configFile = SPIFFS.open(CONFIG_FILE_NAME, "w");
   if (!configFile) {
-    LoggerClass::Instance()->Debugln("Failed to open config file for writing");
+    Logger::Instance()->Debugln("Failed to open config file for writing");
     return false;
   }
 
   json.printTo(configFile);
-  LoggerClass::Instance()->Debugln("Exiting ConfigClass::__SaveDefaultConfig");
+  Logger::Instance()->Debugln("Exiting Config::__SaveDefaultConfig");
   return true;
 }
 
-const char* ConfigClass::Get(const char* configName)
+const char* Config::Get(const char* configName)
 {
   
-  LoggerClass::Instance()->Debugln("Entering ConfigClass::Get");
+  Logger::Instance()->Debugln("Entering Config::Get");
   
   if(!__IsValid()){
-    LoggerClass::Instance()->Debugln("ConfigClass::Init - Missing Config. Saving Default Config");
+    Logger::Instance()->Debugln("Config::Init - Missing Config. Saving Default Config");
     __SaveDefaultConfig();
   }
 
    File configFile = SPIFFS.open(CONFIG_FILE_NAME, "r");
   if (!configFile) {
-    LoggerClass::Instance()->Debugln("Failed to open config file");
+    Logger::Instance()->Debugln("Failed to open config file");
     return false;
   }
     
   size_t size = configFile.size();
   if (size > 1024) {
-    LoggerClass::Instance()->Debugln("Config file size is too large");
+    Logger::Instance()->Debugln("Config file size is too large");
     return '\0';
   }
   
@@ -70,7 +70,7 @@ const char* ConfigClass::Get(const char* configName)
   JsonObject& jsonObject = jsonBuffer.parseObject(buf.get());
 
   if (!jsonObject.success()) {
-    LoggerClass::Instance()->Debugln("Failed to parse config file");
+    Logger::Instance()->Debugln("Failed to parse config file");
     return '\0';
   }
 
@@ -78,11 +78,11 @@ const char* ConfigClass::Get(const char* configName)
     
 }
 
-bool ConfigClass::Update()
+bool Config::Update()
 {
-    LoggerClass::Instance()->Debugln("Entering ConfigClass::Update");
+    Logger::Instance()->Debugln("Entering Config::Update");
     
-    LoggerClass::Instance()->Debugln("Exiting ConfigClass::Update");
+    Logger::Instance()->Debugln("Exiting Config::Update");
     return false;
 }
 
