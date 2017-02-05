@@ -6,24 +6,23 @@
 //#include "Network.h"
 
 
-enum CONFIG_KEY{AP_NAME,AP_KEY,EP_URL};
+enum CONFIG_KEY{AP_NAME,AP_KEY,EP_URL,CONFIG_VERSION};
 
 class Config {
     
 
 private:
-    String CONFIG_VALUE[3] = {"AP_NAME","AP_KEY","EP_URL"};
+    String CONFIG_VALUE[4] = {"AP_NAME","AP_KEY","EP_URL","CONFIG_VERSION"};
     static Config *s_instance;
-    const char* CONFIG_FILE_NAME = "/device.config";
+    const char* CONFIG_FILE_NAME = "/config.json.tmp";
     bool __IsValid();
     bool __SaveDefaultConfig();
     
     
 public:
-
     const char* DEFAULT_AP_NAME = "$DEVICE_DISCOVERY$";
     const char* DEFAULT_AP_KEY = "admin@12345";
-    const char* DEFAULT_EP_URL = "https://dev.idnno.com/";
+    const char* DEFAULT_EP_URL = "http://172.20.10.4:3000/";
     static Config *Instance()
     {
           if (!s_instance)

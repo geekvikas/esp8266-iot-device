@@ -18,6 +18,7 @@ private:
 public:
 	bool Register();
 	String GetDeviceInfo();
+	String GetFirmwareInfo();
 	String DeviceId;
 	unsigned int LeaseExpiry;
 	unsigned int HeartBeatInterval = 1000;

@@ -5,12 +5,16 @@
 enum MESSAGE{HEART_BEAT,REGISTER};
 
 class ClientMessageClass {
+  String MESSAGE_VALUE[2] = {"HBT","REG"};
+   
 public:
 	MESSAGE msg;
   char* data; 
 
   ClientMessageClass Get(MESSAGE,char*);
   ClientMessageClass Get(MESSAGE);
+  String ToString(MESSAGE);
+  
 };
 
 #endif

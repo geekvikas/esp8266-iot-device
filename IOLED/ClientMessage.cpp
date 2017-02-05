@@ -16,5 +16,8 @@ ClientMessageClass ClientMessageClass::Get(MESSAGE msg ){
    return Get(msg,'\0');
 }
 
+String ClientMessageClass::ToString(MESSAGE msg){
+    return MESSAGE_VALUE[msg];
+}
 
 

@@ -61,50 +61,28 @@ Purpose:        This is the main "loop" subroutine which is at the heart of the 
 
 void loop() {
 
-    // // Check if still connected, otherwise attempt to reconnect
-    // if(!Network.IsConnected){
-    //     Network.Connect();
-    // }
-    // // In case its already connected
-    // else{
-    //     // Look up for latest config from the server and update the local config file
-    //     // If new Config file found then reconnect the Network with updated config file
-    //     if(ConfigClass::Instance()->Update()){
-    //         LoggerClass::Instance()->Debugln("Configuration changed, reconnecting...");
-    //         Network.Connect();
-    //     }
-    //     else{
-    //       LoggerClass::Instance()->Debugln("Configuration unchanged...");
-    //     }
-      
-    //     // Update the System time from the server
-    //     unsigned int serverTime = ServerUtils.GetTime();
-
-        
-    //     // If valid time is returned from the server
-    //     if(serverTime>0){
-    //         SysUtils.UpdateTime(serverTime);
-    //         LoggerClass::Instance()->Debugln("Change in server time detected, local time updated...");
-    //     }
-
-    //     // Send a heart beat to the server and execute the command returned by server
-    //     TaskRunner.Run(ServerUtils.SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
-     
-    // }
+    // Check if still connected, otherwise attempt to reconnect
+    if(!Network.Connect())
+        return;
+    
+    
+    // In case its already connected, continue
 
     // Check if Device is registered to server and has valid DeviceId
     // Sleep for 10 seconds and Exit loop() in case of failure to register 
+
     if(Device::Instance()->Register()){
         Logger::Instance()->Debug("Device Id: ");
         Logger::Instance()->Debugln(Device::Instance()->DeviceId);
 
         // Send a heart beat to the server and execute the command returned by server
         TaskRunner.Run(ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
-        delay(Device::Instance()->HeartBeatInterval);
+        //delay(Device::Instance()->HeartBeatInterval);
     }
     else{
         delay(FAIL_REGISTER_SLEEP_INTERVAL);
         return;
     }
+
 
 }

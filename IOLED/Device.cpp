@@ -27,6 +27,11 @@ bool Device::Register()
 }
 
 
+String Device::GetFirmwareInfo()
+{
+    return DEVICE_FIRMWARE_INFO;
+}
+
 String Device::GetDeviceInfo()
 {
   String retVal = "";

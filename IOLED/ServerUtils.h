@@ -10,8 +10,9 @@
 
 class ServerUtils {
 private:
-  HTTPClient __http;
+  	HTTPClient __http;
 	static ServerUtils *s_instance;
+	String GenerateMessage(ClientMessageClass);
 public:
 	static ServerUtils *Instance()
 	{
@@ -21,6 +22,7 @@ public:
 	}
 	unsigned int GetTime();
  	TaskClass SendMessage(ClientMessageClass);
+	
 };
 
 #endif
