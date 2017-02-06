@@ -49,7 +49,7 @@ void TaskRunnerClass::Run(Task task)
 
         case TASK::LED:
             Logger::Instance()->Debugln("LED Command received, playing the pattern...");
-            LED.PlayPattern(LED_BUILTIN,task.data,task.value);
+            LED::Instance()->PlayPattern(LED_BUILTIN,task.data,task.value);
             Logger::Instance()->Debugln("done playing the LED pattern... time for a quick snooze");
             delay(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up...");
