@@ -5,6 +5,7 @@
 #include "ServerUtils.h"
 #include "TaskRunner.h"
 #include "Device.h"
+#include "LED.h"
 #include "Logger.h"
 
 // Local variables objects utilized in the sketch
