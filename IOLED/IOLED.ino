@@ -12,7 +12,6 @@
 ClientMessageClass ClientMessage;
 NetworkClass Network;
 SysUtilsClass SysUtils;
-TaskRunnerClass TaskRunner;
 
 // These are singleton objects to keep the single copy of Configuration in memory 
 Logger *Logger::s_instance = 0;
@@ -22,6 +21,7 @@ ServerUtils *ServerUtils::s_instance = 0;
 Http *Http::s_instance = 0;
 Task *Task::s_instance = 0;
 LEDController *LEDController::s_instance = 0;
+TaskRunner *TaskRunner::s_instance = 0;
 
 const int FAIL_REGISTER_SLEEP_INTERVAL = 10 * 1000; // 10 Seconds
 
@@ -40,7 +40,8 @@ Purpose:        This is the entry point in Arduino to initialize the device and 
 void setup() {
  
 
-    //pinMode(LED_BUILTIN, OUTPUT); 
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH); // Turn Off the LED on BOOT
     // Attempt to connect to WiFi from the WiFi config pool defined in the device.json
     while(!Network.IsConnected)
         Network.Connect();
@@ -53,14 +54,10 @@ Purpose:        This is the main "loop" subroutine which is at the heart of the 
                 Steps Taken
                 ===========
                 1) Double check if WiFi is connected
-                2) Check if Device is registered to the server
-                    a. If not registered, then Register the device to the server
-                    b. Registration call will return the latest device.json for the device, which is saved in SPIFFS
-                    c. If alredy registered then check if registration is still valid, renew the lease from server
-                    d. Renewing the lease or initial registration will return the server time stamp and heartbeat interval along with server endpoint Url(s)
-                3) Sleep until heartbeat interval is not triggered
-                4) Send a Heartbeat to the server and get the list of pending tasks from the server
-                5) Perform the task and report the result back to server, if more tasks are available then keep fetching until the server tasks queue has been cleared
+                2) Register/renew registration of the device to the server
+                3) Server will return a Task which will be executed by device
+                4) After the task has been executed the device will sleep for a MINIMUM interval
+                5) TODO: Perform the task and report the result back to server, if more tasks are available then keep fetching until the server tasks queue has been cleared
                 6) Go to Step 3
 */
 
@@ -81,7 +78,7 @@ void loop() {
         Logger::Instance()->Debugln(Device::Instance()->DeviceId);
 
         // Send a heart beat to the server and execute the command returned by server
-        TaskRunner.Run(ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
+        TaskRunner::Instance()->Run(ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::HEART_BEAT)));
         //delay(Device::Instance()->HeartBeatInterval);
     }
     else{

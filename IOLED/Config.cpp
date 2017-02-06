@@ -35,7 +35,7 @@ bool Config::__SaveDefaultConfig(){
   return true;
 }
 
-const char* Config::Get(CONFIG_KEY configKey)
+String Config::Get(CONFIG_KEY configKey)
 {
   
   Logger::Instance()->Debugln("Entering Config::Get");
@@ -48,13 +48,13 @@ const char* Config::Get(CONFIG_KEY configKey)
    File configFile = SPIFFS.open(CONFIG_FILE_NAME, "r");
   if (!configFile) {
     Logger::Instance()->Debugln("Failed to open config file");
-    return false;
+    return "";
   }
     
   size_t size = configFile.size();
   if (size > 1024) {
     Logger::Instance()->Debugln("Config file size is too large");
-    return '\0';
+    return "";
   }
   
   // Allocate a buffer to store contents of the file.
@@ -71,7 +71,7 @@ const char* Config::Get(CONFIG_KEY configKey)
 
   if (!jsonObject.success()) {
     Logger::Instance()->Debugln("Failed to parse config file");
-    return '\0';
+    return "";
   }
   
   return jsonObject[CONFIG_VALUE[configKey]];

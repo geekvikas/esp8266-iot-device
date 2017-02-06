@@ -13,8 +13,7 @@ private:
 	ClientMessageClass ClientMessage;
 	
 	unsigned int RegisterCheckSkipCount = 10;
-	const unsigned int RegisterCheckSkipLimit = 10;
-  static Device *s_instance;
+	static Device *s_instance;
   
 public:
 	
@@ -22,7 +21,8 @@ public:
 	String GetDeviceInfo();
 	String GetFirmwareInfo();
 	String DeviceId;
-	unsigned int LeaseExpiry;
+	unsigned int RegisterCheckSkipLimit = 10;
+  unsigned int LeaseExpiry;
 	unsigned int HeartBeatInterval = 1000;
 	static Device *Instance()
     {

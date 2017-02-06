@@ -14,7 +14,7 @@ class Config {
 private:
     String CONFIG_VALUE[4] = {"AP_NAME","AP_KEY","EP_URL","CONFIG_VERSION"};
     
-    const char* CONFIG_FILE_NAME = "/config.json.tmp";
+    String CONFIG_FILE_NAME = "/devconf.json";
     bool __IsValid();
     bool __SaveDefaultConfig();
     static Config *s_instance;
@@ -22,16 +22,16 @@ private:
     
 public:
     
-    const char* DEFAULT_AP_NAME = "$DEVICE_DISCOVERY$";
-    const char* DEFAULT_AP_KEY = "admin@12345";
-    const char* DEFAULT_EP_URL = "http://172.20.10.4:3000/";
+    String DEFAULT_AP_NAME = "$DEVICE_DISCOVERY$";
+    String DEFAULT_AP_KEY = "admin@12345";
+    String DEFAULT_EP_URL = "http://172.20.10.4:3000/";
     static Config *Instance()
     {
           if (!s_instance)
             s_instance = new Config;
           return s_instance;
     }
-    const char* Get(CONFIG_KEY);
+    String Get(CONFIG_KEY);
     bool Update();
 };
 

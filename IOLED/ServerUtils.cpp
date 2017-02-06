@@ -62,9 +62,13 @@ Task ServerUtils::JsonToTask(String json){
         retTask.data = messageData;
         retTask.value = messageValue.toInt();
 
-        if(messageType == Task::Instance()->ToString(TASK::FWUPDATE)){
-            Logger::Instance()->Debug("Task Type: FWUPDATE, ");
-            retTask.type = TASK::FWUPDATE;
+        if(messageType == Task::Instance()->ToString(TASK::FW_UPDATE)){
+            Logger::Instance()->Debug("Task Type: FW_UPDATE, ");
+            retTask.type = TASK::FW_UPDATE;
+        }
+        else if(messageType == Task::Instance()->ToString(TASK::CONFIG_UPDATE)){
+            Logger::Instance()->Debug("Task Type: CONFIG_UPDATE, ");
+            retTask.type = TASK::CONFIG_UPDATE;
         }
         else if(messageType == Task::Instance()->ToString(TASK::LED)){
             Logger::Instance()->Debug("Task Type: LED, ");
@@ -74,9 +78,21 @@ Task ServerUtils::JsonToTask(String json){
             Logger::Instance()->Debug("Task Type: REBOOT, ");
             retTask.type = TASK::REBOOT;
         }
+        else if(messageType == Task::Instance()->ToString(TASK::SHUTDOWN)){
+            Logger::Instance()->Debug("Task Type: SHUTDOWN, ");
+            retTask.type = TASK::SHUTDOWN;
+        }
         else if(messageType == Task::Instance()->ToString(TASK::SLEEP)){
             Logger::Instance()->Debug("Task Type: SLEEP, ");
             retTask.type = TASK::SLEEP;
+        }
+        else if(messageType == Task::Instance()->ToString(TASK::REG_OK)){
+            Logger::Instance()->Debug("Task Type: REG_OK, ");
+            retTask.type = TASK::REG_OK;
+        }
+        else if(messageType == Task::Instance()->ToString(TASK::REG_INVALID)){
+            Logger::Instance()->Debug("Task Type: REG_INVALID, ");
+            retTask.type = TASK::REG_INVALID;
         }
         else{
             Logger::Instance()->Debug("Task Type: NOP, ");

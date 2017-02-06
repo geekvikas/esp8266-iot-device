@@ -1,6 +1,6 @@
 #include "ClientMessage.h"
 
-ClientMessageClass ClientMessageClass::Get(MESSAGE msg ,char* data = '\0'){
+ClientMessageClass ClientMessageClass::Get(MESSAGE msg , String data){
    Logger::Instance()->Debugln("Entering ClientMessageClass::Get");
     
    ClientMessageClass* cmsg = new ClientMessageClass();
@@ -13,7 +13,7 @@ ClientMessageClass ClientMessageClass::Get(MESSAGE msg ,char* data = '\0'){
 
 
 ClientMessageClass ClientMessageClass::Get(MESSAGE msg ){
-   return Get(msg,'\0');
+   return Get(msg,"");
 }
 
 String ClientMessageClass::ToString(MESSAGE msg){

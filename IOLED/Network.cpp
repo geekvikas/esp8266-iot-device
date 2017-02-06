@@ -26,7 +26,7 @@ bool NetworkClass::Connect()
     Logger::Instance()->Debug("Trying to connect to ...");
     Logger::Instance()->Debugln(Config::Instance()->Get(CONFIG_KEY::AP_NAME));
     
-    __WiFiMulti.addAP(Config::Instance()->Get(CONFIG_KEY::AP_NAME), Config::Instance()->Get(CONFIG_KEY::AP_KEY));
+    __WiFiMulti.addAP(Config::Instance()->Get(CONFIG_KEY::AP_NAME).c_str(), Config::Instance()->Get(CONFIG_KEY::AP_KEY).c_str());
     //Wait till we connect to the WiFi
     while(__WiFiMulti.run() != WL_CONNECTED) {
       Logger::Instance()->Debug(".");

@@ -1,7 +1,7 @@
 #include "Http.h"
 #include <ESP8266HTTPClient.h>
 
-const char *USER_AGENT = "IOLEDv1";
+const String USER_AGENT = "IOLEDv1";
 
 String Http::Get(String url){
 	String retVal;

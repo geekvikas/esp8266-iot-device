@@ -8,8 +8,21 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
-  console.log(req);
-  res.json({status:"success",message: {type:"LED",data:"10",value:100}});
+  var respJson = {};
+
+  switch(req.body.message.type){
+    case "HBT":
+      console.log("Heartbeat received..." + req.body);
+      respJson = {status:"success",message: {type:"SHUTDOWN",data:"",value:1000}};
+    break;
+
+    case "REG":
+      console.log("Registration received...");
+      console.log("Old Device Id: " + req.body.message.data);
+      respJson = {status:"success",message: {type:"REG_OK",data:"NewDevId",value:0}};
+    break;
+  }
+  res.json(respJson);
 });
 
 module.exports = router;

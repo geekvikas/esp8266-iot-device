@@ -7,24 +7,26 @@
 
 bool Device::Register()
 {
+    
+    bool retValue = false;
     Logger::Instance()->Debugln("Entering DeviceClass::Register");
     
-    if(RegisterCheckSkipCount<RegisterCheckSkipLimit){
+    if(++RegisterCheckSkipCount<RegisterCheckSkipLimit && Device::Instance()->DeviceId.length()>0){
         Logger::Instance()->Debugln("DeviceClass::Register - Registration has not expired");
-        RegisterCheckSkipCount++;
+        retValue = true;
     }
     else{
         Logger::Instance()->Debugln("DeviceClass::Register - Registration Renew Complete");
         RegisterCheckSkipCount = 0;
         
-        Task task = ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::REGISTER));
-        
+        TaskRunner::Instance()->Run(ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::REGISTER,Device::Instance()->DeviceId)));
+        retValue = true;
     }
     
     
     Logger::Instance()->Debugln("Exiting DeviceClass::Register");    
     
-    return true;
+    return retValue;
 }
 
 

@@ -15,14 +15,9 @@ Logger::~Logger(){
     if(logFile) logFile.close();
 }
 
-void Logger::Debug(const char *msg)
+void Logger::Debug(String msg)
 {
   DEBUG.print(msg);
-}
-
-void Logger::Debugln(const char *msg)
-{
-  DEBUG.println(msg);
 }
 
 void Logger::Debugln(String msg)
@@ -30,7 +25,7 @@ void Logger::Debugln(String msg)
   DEBUG.println(msg);
 }
 
-void Logger::Error(const char *msg)
+void Logger::Error(String msg)
 {
     if (!logFile) 
         Debugln("Failed to open log file for writing");
@@ -39,7 +34,7 @@ void Logger::Error(const char *msg)
 }
 
 
-void Logger::Errorln(const char *msg)
+void Logger::Errorln(String msg)
 {
     if (!logFile) 
         Debugln("Failed to open log file for writing");
