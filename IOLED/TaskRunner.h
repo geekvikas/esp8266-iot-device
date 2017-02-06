@@ -1,7 +1,7 @@
 #ifndef TASKRUNNER_H
 #define TASKRUNNER_H
 #include "Task.h"
-#include "LED.h"
+#include "LEDController.h"
 #include "Logger.h"
 
 class TaskRunnerClass {

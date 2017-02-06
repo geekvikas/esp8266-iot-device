@@ -5,7 +5,7 @@
 #include "ServerUtils.h"
 #include "TaskRunner.h"
 #include "Device.h"
-#include "LED.h"
+#include "LEDController.h"
 #include "Logger.h"
 
 // Local variables objects utilized in the sketch
@@ -21,7 +21,7 @@ Device *Device::s_instance = 0;
 ServerUtils *ServerUtils::s_instance = 0;
 Http *Http::s_instance = 0;
 Task *Task::s_instance = 0;
-LED *LED::s_instance = 0;
+LEDController *LEDController::s_instance = 0;
 
 const int FAIL_REGISTER_SLEEP_INTERVAL = 10 * 1000; // 10 Seconds
 
