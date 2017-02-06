@@ -4,7 +4,9 @@
 
 #include "Device.h"
 
-
+void Device::Sleep(unsigned int interval){
+    delay(interval);
+}
 bool Device::Register()
 {
     
@@ -40,6 +42,7 @@ String Device::GetDeviceInfo()
   String retVal = "";
   //return retVal;
          retVal = retVal + "{";
+         retVal = retVal +    "\"deviceId\":\"" + DeviceId + "\",";
          retVal = retVal +    "\"vcc\":\"" + ESP.getVcc() + "\",";
          retVal = retVal +    "\"freeHeap\":\"" + ESP.getFreeHeap() + "\",";
          retVal = retVal +    "\"bootMode\":\"" + ESP.getBootMode() + "\",";

@@ -1,6 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 #include "Logger.h"
+#include "SysUtils.h"
 #include "Config.h"
 #include <ESP8266WiFiMulti.h>
 

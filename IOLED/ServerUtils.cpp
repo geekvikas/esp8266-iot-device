@@ -70,6 +70,10 @@ Task ServerUtils::JsonToTask(String json){
             Logger::Instance()->Debug("Task Type: CONFIG_UPDATE, ");
             retTask.type = TASK::CONFIG_UPDATE;
         }
+        else if(messageType == Task::Instance()->ToString(TASK::FACTORY_RESET)){
+            Logger::Instance()->Debug("Task Type: FACTORY_RESET, ");
+            retTask.type = TASK::FACTORY_RESET;
+        }        
         else if(messageType == Task::Instance()->ToString(TASK::LED)){
             Logger::Instance()->Debug("Task Type: LED, ");
             retTask.type = TASK::LED;

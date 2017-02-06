@@ -11,9 +11,9 @@
 // Local variables objects utilized in the sketch
 ClientMessageClass ClientMessage;
 NetworkClass Network;
-SysUtilsClass SysUtils;
 
 // These are singleton objects to keep the single copy of Configuration in memory 
+SysUtils *SysUtils::s_instance = 0;
 Logger *Logger::s_instance = 0;
 Config *Config::s_instance = 0;
 Device *Device::s_instance = 0;
@@ -82,7 +82,7 @@ void loop() {
         //delay(Device::Instance()->HeartBeatInterval);
     }
     else{
-        delay(FAIL_REGISTER_SLEEP_INTERVAL);
+        SysUtils::Instance()->Sleep(FAIL_REGISTER_SLEEP_INTERVAL);
         return;
     }
 

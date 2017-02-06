@@ -16,7 +16,7 @@ void TaskRunner::Run(Task task)
             Logger::Instance()->Debug("FW update required, FW download URL: ");
             Logger::Instance()->Debugln(task.data);
             // TODO : Update the FW
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
             break;
       
@@ -24,8 +24,14 @@ void TaskRunner::Run(Task task)
             Logger::Instance()->Debug("Config update required, Config download URL: ");
             Logger::Instance()->Debugln(task.data);
             // TODO : Update the Config
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
+            break;
+
+        case TASK::FACTORY_RESET:
+            Logger::Instance()->Debug("Factory Reset required...");
+            Config::Instance()->FactoryReset();
+            SysUtils::Instance()->Restart();      
             break;
       
         case TASK::SLEEP:
@@ -34,7 +40,7 @@ void TaskRunner::Run(Task task)
                 sleepInterval = MIN_SLEEP_TIME; // In case of invalid time or no time specified, sleep for least amount 
             
             Logger::Instance()->Debugln("Sleep command received...going to snooze");
-            delay(sleepInterval);      
+            SysUtils::Instance()->Sleep(sleepInterval);      
             Logger::Instance()->Debugln("Woke up from Sleep");
             
             break;
@@ -43,20 +49,20 @@ void TaskRunner::Run(Task task)
             Logger::Instance()->Debugln("Rebooting...");
             sleepInterval = task.value;
             if(sleepInterval>0 && sleepInterval<MAX_SLEEP_TIME)
-                delay(sleepInterval);
-            ESP.restart();
+                SysUtils::Instance()->Sleep(sleepInterval);
+            SysUtils::Instance()->Restart();
             break;
 
         case TASK::SHUTDOWN:
             Logger::Instance()->Debugln("Shuting down...");
-            ESP.deepSleep(0);       // Sleep forever
+            SysUtils::Instance()->Shutdown(); // Sleep forever in deepSleep mode
             break;
 
         case TASK::LED:
             Logger::Instance()->Debugln("LED Command received, playing the pattern...");
             LEDController::Instance()->PlayPattern(LED_BUILTIN,task.data,task.value);
             Logger::Instance()->Debugln("done playing the LED pattern... time for a quick snooze");
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up...");
             break;
 
@@ -66,7 +72,7 @@ void TaskRunner::Run(Task task)
             if(task.value>0)
                 Device::Instance()->RegisterCheckSkipLimit = task.value;
             
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from REG_OK snooze");
             break;
         
@@ -75,13 +81,13 @@ void TaskRunner::Run(Task task)
             Device::Instance()->DeviceId = "";
             Device::Instance()->RegisterCheckSkipLimit = 0;
             
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from REG_INVALID snooze");
             break;
 
         case TASK::NOP:
             Logger::Instance()->Debugln("NOP Received...going to quick snooze");
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from NOP snooze");
             break;
 
@@ -89,7 +95,7 @@ void TaskRunner::Run(Task task)
             // No operation is required, continue in next loop
             // Not recommended, sleep atleast minimum interval
             Logger::Instance()->Debugln("No Response Received...going to quick snooze");
-            delay(MIN_SLEEP_TIME);      
+            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up...");
             break;
 

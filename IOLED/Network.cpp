@@ -32,9 +32,9 @@ bool NetworkClass::Connect()
       Logger::Instance()->Debug(".");
       //sleep for 1 seconds while we connect to WiFi and simulate by blinking the BUILTIN light
       digitalWrite(LED_BUILTIN, HIGH); // Turn the LED off by making the voltage HIGH
-      delay(500);                      // Wait for a second
+      SysUtils::Instance()->Sleep(500);                      // Wait for a second
       digitalWrite(LED_BUILTIN, LOW);  // Turn the LED on by making the voltage LOW
-      delay(500);     
+      SysUtils::Instance()->Sleep(500);     
     }
 
     // If finally the WiFi connection is made then turn on the LED and set IsConnected to true

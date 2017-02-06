@@ -3,11 +3,22 @@
 
 #include "SysUtils.h"
 
-bool SysUtilsClass::UpdateTime(unsigned int time)
+void SysUtils::Sleep(unsigned int interval)
 {
-    Logger::Instance()->Debugln("Entering SysUtilsClass::UpdateTime");
+    Logger::Instance()->Debugln("Entering SysUtils::Sleep");
+    delay(interval);
+    Logger::Instance()->Debugln("Exiting SysUtils::Sleep");
     
-    Logger::Instance()->Debugln("Exiting SysUtilsClass::UpdateTime");
-    return true;
 }
 
+void SysUtils::Restart()
+{
+    Logger::Instance()->Debugln("Entering SysUtils::Restart");
+    ESP.restart();          // Software RESET
+}
+
+void SysUtils::Shutdown()
+{
+    Logger::Instance()->Debugln("Entering SysUtils::Shutdown");
+    ESP.deepSleep(0);       // Sleep forever
+}

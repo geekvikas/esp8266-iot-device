@@ -1,5 +1,7 @@
 #ifndef LEDCONTROLLER_H
 #define LEDCONTROLLER_H
+
+#include "SysUtils.h"
 #include "Logger.h"
 
 class LEDController {

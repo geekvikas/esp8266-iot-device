@@ -14,7 +14,7 @@ class Config {
 private:
     String CONFIG_VALUE[4] = {"AP_NAME","AP_KEY","EP_URL","CONFIG_VERSION"};
     
-    String CONFIG_FILE_NAME = "/devconf.json";
+    String CONFIG_FILE_NAME = "/device.json";
     bool __IsValid();
     bool __SaveDefaultConfig();
     static Config *s_instance;
@@ -32,6 +32,7 @@ public:
           return s_instance;
     }
     String Get(CONFIG_KEY);
+    bool FactoryReset();
     bool Update();
 };
 

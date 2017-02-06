@@ -10,6 +10,7 @@ enum TASK{
       SLEEP,          // Sleep the device for a certain period, save battery
       LED,            // LED operation
       CONFIG_UPDATE,  // Update the local Configuration file from a Server URL
+      FACTORY_RESET,  // Remove the local config file and revert back to Default configurations, drop the Network connections
       FW_UPDATE,      // Update the local FW from a Server URL
       REBOOT,         // Reboot the device
       SHUTDOWN        // Turn Off / Shutdown the device. Forced re-registration by server, or device BLACKLIST mode
@@ -21,13 +22,14 @@ class Task {
 
   public:
     
-    String TASK_VALUE[9] = {
+    String TASK_VALUE[10] = {
         "NOP",
         "REG_OK",
         "REG_INVALID",
         "SLEEP",
         "LED",
         "CONFIG_UPDATE",
+        "FACTORY_RESET",
         "FW_UPDATE",
         "REBOOT",
         "SHUTDOWN"

@@ -12,8 +12,9 @@ router.post('/', function(req, res, next) {
 
   switch(req.body.message.type){
     case "HBT":
-      console.log("Heartbeat received..." + req.body);
-      respJson = {status:"success",message: {type:"SHUTDOWN",data:"",value:1000}};
+      console.log("Heartbeat received...");
+      console.log(req.body);
+      respJson = {status:"success",message: {type:"NOP",data:"",value:0}};
     break;
 
     case "REG":

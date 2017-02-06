@@ -20,6 +20,7 @@ public:
 	bool Register();
 	String GetDeviceInfo();
 	String GetFirmwareInfo();
+	void Sleep(unsigned int);
 	String DeviceId;
 	unsigned int RegisterCheckSkipLimit = 10;
   unsigned int LeaseExpiry;

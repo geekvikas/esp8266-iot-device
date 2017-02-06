@@ -45,7 +45,7 @@ String Config::Get(CONFIG_KEY configKey)
     __SaveDefaultConfig();
   }
 
-   File configFile = SPIFFS.open(CONFIG_FILE_NAME, "r");
+  File configFile = SPIFFS.open(CONFIG_FILE_NAME, "r");
   if (!configFile) {
     Logger::Instance()->Debugln("Failed to open config file");
     return "";
@@ -84,6 +84,15 @@ bool Config::Update()
     
     Logger::Instance()->Debugln("Exiting Config::Update");
     return false;
+}
+
+
+bool Config::FactoryReset()
+{
+    Logger::Instance()->Debugln("Entering Config::FactoryReset");
+    SPIFFS.remove(CONFIG_FILE_NAME);
+    Logger::Instance()->Debugln("Exiting Config::FactoryReset");
+    return true;
 }
 
 

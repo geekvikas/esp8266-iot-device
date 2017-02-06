@@ -23,6 +23,6 @@ void LEDController::PlayPattern(int PIN, String Pattern, int interval)
         else
             digitalWrite(PIN, LOW);     // Turn ON the LED
 
-        delay(interval);            // Sleep for a predefined interval
+        SysUtils::Instance()->Sleep(interval);            // Sleep for a predefined interval
     }
 }
