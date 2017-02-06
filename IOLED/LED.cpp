@@ -13,11 +13,11 @@ void LED::PlayPattern(int PIN, String Pattern, int interval)
         interval = DEFAULT_LED_INTERVAL;
         
     pinMode(PIN, OUTPUT); 
-    byte bytes[message.length()];
-    message.getBytes(bytes, message.length());
+    byte bytes[Pattern.length()];
+    Pattern.getBytes(bytes, Pattern.length());
 
     int i = 0;
-    for (int i = 0; i < message.length(); i++){
+    for (int i = 0; i < Pattern.length(); i++){
         if(bytes[i]=='0')
             digitalWrite(PIN, HIGH);    // Turn OFF the LED
         else

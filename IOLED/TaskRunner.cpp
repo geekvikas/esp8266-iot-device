@@ -14,7 +14,7 @@ void TaskRunnerClass::Run(Task task)
 
         case TASK::FWUPDATE:
             Logger::Instance()->Debug("FW update required, ");
-            Logger::Instance()->Debug("FW download URL: " + messageData);
+            Logger::Instance()->Debug("FW download URL: " + task.data);
             // TODO : Update the FW
             delay(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
@@ -22,7 +22,7 @@ void TaskRunnerClass::Run(Task task)
       
         case TASK::CNFGUPDATE:
             Logger::Instance()->Debug("Config update required, ");
-            Logger::Instance()->Debug("Config download URL: " + messageData);
+            Logger::Instance()->Debug("Config download URL: " + task.data);
             // TODO : Update the Config
             delay(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
@@ -30,7 +30,7 @@ void TaskRunnerClass::Run(Task task)
       
         case TASK::SLEEP:
             sleepInterval = task.value;
-            if(!(sleepInterval>=MIN_SLEEP_TIME && sleepInterval<= MAX_SLEEP_TIME))
+            if(sleepInterval<MIN_SLEEP_TIME || sleepInterval>MAX_SLEEP_TIME))
                 sleepInterval = MIN_SLEEP_TIME; // In case of invalid time or no time specified, sleep for least amount 
             
             Logger::Instance()->Debugln("Sleep command received...going to snooze");
@@ -41,13 +41,15 @@ void TaskRunnerClass::Run(Task task)
 
         case TASK::REBOOT:
             Logger::Instance()->Debugln("Rebooting...");
-            // TODO : Reboot the system
+            sleepInterval = task.value;
+            if(sleepInterval>0 && sleepInterval<MAX_SLEEP_TIME))
+                delay(sleepInterval);
             ESP.restart();
             break;
 
         case TASK::LED:
             Logger::Instance()->Debugln("LED Command received, playing the pattern...");
-            LED.PlayPattern(LED_BUILTIN,messageData,messageValue);
+            LED.PlayPattern(LED_BUILTIN,task.data,task.value);
             Logger::Instance()->Debugln("done playing the LED pattern... time for a quick snooze");
             delay(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up...");
