@@ -11,11 +11,13 @@
 class Device {
 private:
 	ClientMessageClass ClientMessage;
-	static Device *s_instance;
+	
 	unsigned int RegisterCheckSkipCount = 10;
 	const unsigned int RegisterCheckSkipLimit = 10;
-
+  static Device *s_instance;
+  
 public:
+	
 	bool Register();
 	String GetDeviceInfo();
 	String GetFirmwareInfo();

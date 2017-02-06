@@ -2,7 +2,8 @@
 */
 
 #include "ServerUtils.h"
-Http *Http::s_instance = 0;
+
+
 
 // unsigned int ServerUtils::GetTime()
 // {
@@ -20,12 +21,12 @@ Http *Http::s_instance = 0;
 // }
 
 
-TaskClass ServerUtils::SendMessage(ClientMessageClass msg)
+Task ServerUtils::SendMessage(ClientMessageClass msg)
 {
 
     Logger::Instance()->Debugln("Entering ServerUtils::SendMessage");
 
-    TaskClass t;
+    Task t;
     String packet = GenerateMessage(msg);
     String response = "";
     
@@ -44,39 +45,49 @@ TaskClass ServerUtils::SendMessage(ClientMessageClass msg)
     return t; 
 }
 
-TaskClass ServerUtils::JsonToTask(String json){
+Task ServerUtils::JsonToTask(String json){
+    
+    Logger::Instance()->Debugln("Entering ServerUtils::JsonToTask");
+    
     StaticJsonBuffer<200> jsonBuffer;
     JsonObject& root = jsonBuffer.parseObject(json);
-    TaskClass retTask;
-    String taskType;
-    if(root["status"]=="success")
+    Task retTask;
+    String status = String((const char *)root["status"]);
+    if(status && status=="success")
     {
-        retTask.data = String((const char *)root["message"]["data"]);
-        retTask.value = root["message"]["value"];
-        taskType = String(root["message"]["type"]);
-        switch(taskType){
-            
-            /*case retTask.ToString(TASK::FWUPDATE):
-                retTask.type = TASK::FWUPDATE;
-            break;
-            
-            case TASK::LED:
-                retTask.type = TASK::LED;
-            break;
-            
-            case TASK::REBOOT:
-                retTask.type = TASK::REBOOT;
-            break;
-            */
-            case String("SLEEP"):
-                retTask.type = TASK::SLEEP;
-            break;
-            
-            case String("NOP"):
-            default:
-                retTask.type = TASK::NOP;
+        String messageType = String((const char *)root["message"]["type"]);
+        String messageData = String((const char *)root["message"]["data"]);
+        String messageValue = String((const char *)root["message"]["value"]);
+        
+        retTask.data = messageData;
+        retTask.value = messageValue.toInt();
+
+        if(messageType == Task::Instance()->ToString(TASK::FWUPDATE)){
+            Logger::Instance()->Debug("Task Type: FWUPDATE, ");
+            retTask.type = TASK::FWUPDATE;
         }
+        else if(messageType == Task::Instance()->ToString(TASK::LED)){
+            Logger::Instance()->Debug("Task Type: LED, ");
+            retTask.type = TASK::LED;
+        }
+        else if(messageType == Task::Instance()->ToString(TASK::REBOOT)){
+            Logger::Instance()->Debug("Task Type: REBOOT, ");
+            retTask.type = TASK::REBOOT;
+        }
+        else if(messageType == Task::Instance()->ToString(TASK::SLEEP)){
+            Logger::Instance()->Debug("Task Type: SLEEP, ");
+            retTask.type = TASK::SLEEP;
+        }
+        else{
+            Logger::Instance()->Debug("Task Type: NOP, ");
+            retTask.type = TASK::NOP;
+        }
+
+        Logger::Instance()->Debugln("Data: " + retTask.data);
+        
     }
+    Logger::Instance()->Debugln("Exiting ServerUtils::JsonToTask");
+    
     return retTask;
 }
 

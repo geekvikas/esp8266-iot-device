@@ -4,6 +4,7 @@
 
 #include "Device.h"
 
+
 bool Device::Register()
 {
     Logger::Instance()->Debugln("Entering DeviceClass::Register");
@@ -16,7 +17,7 @@ bool Device::Register()
         Logger::Instance()->Debugln("DeviceClass::Register - Registration Renew Complete");
         RegisterCheckSkipCount = 0;
         
-        TaskClass task = ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::REGISTER));
+        Task task = ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::REGISTER));
         
     }
     

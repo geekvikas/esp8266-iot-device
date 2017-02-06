@@ -1,7 +1,7 @@
 #ifndef SERVERUTILS_H
 #define SERVERUTILS_H
-#include "ClientMessage.h"  
 #include "Task.h"
+#include "ClientMessage.h"  
 #include "Logger.h"  
 #include "Config.h"  
 #include "Device.h"  
@@ -10,11 +10,14 @@
 
 class ServerUtils {
 private:
-  	HTTPClient __http;
+  HTTPClient __http;
 	static ServerUtils *s_instance;
-	String GenerateMessage(ClientMessageClass);
-	TaskClass JsonToTask(String);
+
+	
 public:
+	
+	String GenerateMessage(ClientMessageClass);
+	Task JsonToTask(String);
 	static ServerUtils *Instance()
 	{
 			if (!s_instance)
@@ -22,7 +25,7 @@ public:
 			return s_instance;
 	}
 	unsigned int GetTime();
- 	TaskClass SendMessage(ClientMessageClass);
+ 	Task SendMessage(ClientMessageClass);
 	
 };
 

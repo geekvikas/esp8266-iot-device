@@ -6,7 +6,10 @@ class Http {
 private:
   HTTPClient __http;
   static Http *s_instance;
+ 
+
 public:
+  
 	String Get(String);
  	String Post(String,String);
 	static Http *Instance()

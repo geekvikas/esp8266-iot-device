@@ -1,6 +1,9 @@
 #include "Http.h"
 #include <ESP8266HTTPClient.h>
 
+
+
+
 String Http::Get(String url){
 	String retVal;
 	__http.begin(url);

@@ -11,7 +11,6 @@
 ClientMessageClass ClientMessage;
 NetworkClass Network;
 SysUtilsClass SysUtils;
-//ServerUtilsClass ServerUtils;
 TaskRunnerClass TaskRunner;
 
 // These are singleton objects to keep the single copy of Configuration in memory 
@@ -19,6 +18,8 @@ Logger *Logger::s_instance = 0;
 Config *Config::s_instance = 0;
 Device *Device::s_instance = 0;
 ServerUtils *ServerUtils::s_instance = 0;
+Http *Http::s_instance = 0;
+Task *Task::s_instance = 0;
 
 const int FAIL_REGISTER_SLEEP_INTERVAL = 10 * 1000; // 10 Seconds
 
@@ -35,6 +36,8 @@ Purpose:        This is the entry point in Arduino to initialize the device and 
 */
 
 void setup() {
+ 
+
     //pinMode(LED_BUILTIN, OUTPUT); 
     // Attempt to connect to WiFi from the WiFi config pool defined in the device.json
     while(!Network.IsConnected)

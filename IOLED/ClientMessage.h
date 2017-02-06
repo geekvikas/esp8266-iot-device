@@ -10,7 +10,6 @@ class ClientMessageClass {
 public:
 	MESSAGE msg;
   char* data; 
-
   ClientMessageClass Get(MESSAGE,char*);
   ClientMessageClass Get(MESSAGE);
   String ToString(MESSAGE);

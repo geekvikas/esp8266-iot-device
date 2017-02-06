@@ -6,6 +6,6 @@
 class TaskRunnerClass {
 
 public:
-	void Run(TaskClass);
+	void Run(Task);
 };
 #endif

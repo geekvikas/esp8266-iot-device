@@ -5,13 +5,15 @@
 
 class Logger {
 private:
-    static Logger *s_instance;
     const char* LOG_FILE_NAME = "/debug.log";
     File logFile;
+    static Logger *s_instance;
+
 public:
-    #define DEBUG Serial
+    
     Logger();
     ~Logger();
+    #define DEBUG Serial
   	void Error(const char*);
     void Errorln(const char*);
     void Debug(const char*);
