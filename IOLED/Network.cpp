@@ -27,6 +27,9 @@ bool NetworkClass::Connect()
     Logger::Instance()->Debugln(Config::Instance()->Get(CONFIG_KEY::AP_NAME));
     
     __WiFiMulti.addAP(Config::Instance()->Get(CONFIG_KEY::AP_NAME).c_str(), Config::Instance()->Get(CONFIG_KEY::AP_KEY).c_str());
+    // Always add the default AP Name just in case the stored config is not contactable
+    __WiFiMulti.addAP(Config::Instance()->DEFAULT_AP_NAME.c_str(), Config::Instance()->DEFAULT_AP_KEY.c_str());
+
     //Wait till we connect to the WiFi
     while(__WiFiMulti.run() != WL_CONNECTED) {
       Logger::Instance()->Debug(".");

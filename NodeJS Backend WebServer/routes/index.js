@@ -13,8 +13,12 @@ router.post('/', function(req, res, next) {
   switch(req.body.message.type){
     case "HBT":
       console.log("Heartbeat received...");
-      console.log(req.body);
-      respJson = {status:"success",message: {type:"NOP",data:"",value:0}};
+      //  console.log(req.body);
+      var newConfig = {AP_NAME:"Eshanya",AP_KEY:"eshanyaverma",EP_URL:"http://10.0.0.221:3000"};
+      var jString = JSON.stringify(newConfig);
+      
+      respJson = {status:"success",message: {type:"NOP",data: jString,value:0}};
+      //console.log(respJson);
     break;
 
     case "REG":
@@ -23,6 +27,7 @@ router.post('/', function(req, res, next) {
       respJson = {status:"success",message: {type:"REG_OK",data:"NewDevId",value:0}};
     break;
   }
+  console.log(JSON.stringify(respJson));
   res.json(respJson);
 });
 

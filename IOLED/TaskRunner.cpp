@@ -23,9 +23,9 @@ void TaskRunner::Run(Task task)
         case TASK::CONFIG_UPDATE:
             Logger::Instance()->Debug("Config update required, Config download URL: ");
             Logger::Instance()->Debugln(task.data);
-            // TODO : Update the Config
-            SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
-            Logger::Instance()->Debugln("Woke up from Sleep");
+            //Http::Instance()->Post(task.data,Device::Instance);
+            if(Config::Instance()->UpdateConfig(task.data))
+                SysUtils::Instance()->Restart();      
             break;
 
         case TASK::FACTORY_RESET:

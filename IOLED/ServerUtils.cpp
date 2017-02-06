@@ -31,10 +31,16 @@ Task ServerUtils::SendMessage(ClientMessageClass msg)
     String response = "";
     
     String sURL = Config::Instance()->Get(CONFIG_KEY::EP_URL);
+    // In case the EP url is not present in the config file, switch to default EP URL
+    
     Logger::Instance()->Debugln(sURL);
     
     // Call the server and get the response back for parsing
     response = Http::Instance()->Post(sURL,packet);
+    if(response.length()==0){
+        sURL = Config::Instance()->DEFAULT_EP_URL;
+        response = Http::Instance()->Post(sURL,packet);
+    }
 
     Logger::Instance()->Debugln("Server Response: "  + response);
     
@@ -49,7 +55,7 @@ Task ServerUtils::JsonToTask(String json){
     
     Logger::Instance()->Debugln("Entering ServerUtils::JsonToTask");
     
-    StaticJsonBuffer<200> jsonBuffer;
+    StaticJsonBuffer<500> jsonBuffer;
     JsonObject& root = jsonBuffer.parseObject(json);
     Task retTask;
     String status = String((const char *)root["status"]);

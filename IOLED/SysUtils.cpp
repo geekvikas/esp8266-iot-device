@@ -5,9 +5,9 @@
 
 void SysUtils::Sleep(unsigned int interval)
 {
-    Logger::Instance()->Debugln("Entering SysUtils::Sleep");
+    //Logger::Instance()->Debugln("Entering SysUtils::Sleep");
     delay(interval);
-    Logger::Instance()->Debugln("Exiting SysUtils::Sleep");
+    //Logger::Instance()->Debugln("Exiting SysUtils::Sleep");
     
 }
 
