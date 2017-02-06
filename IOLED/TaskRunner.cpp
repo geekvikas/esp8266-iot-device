@@ -30,7 +30,7 @@ void TaskRunnerClass::Run(Task task)
       
         case TASK::SLEEP:
             sleepInterval = task.value;
-            if(sleepInterval<MIN_SLEEP_TIME || sleepInterval>MAX_SLEEP_TIME))
+            if(sleepInterval<MIN_SLEEP_TIME || sleepInterval>MAX_SLEEP_TIME)
                 sleepInterval = MIN_SLEEP_TIME; // In case of invalid time or no time specified, sleep for least amount 
             
             Logger::Instance()->Debugln("Sleep command received...going to snooze");
@@ -42,7 +42,7 @@ void TaskRunnerClass::Run(Task task)
         case TASK::REBOOT:
             Logger::Instance()->Debugln("Rebooting...");
             sleepInterval = task.value;
-            if(sleepInterval>0 && sleepInterval<MAX_SLEEP_TIME))
+            if(sleepInterval>0 && sleepInterval<MAX_SLEEP_TIME)
                 delay(sleepInterval);
             ESP.restart();
             break;
