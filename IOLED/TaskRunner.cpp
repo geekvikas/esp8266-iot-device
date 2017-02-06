@@ -13,16 +13,16 @@ void TaskRunnerClass::Run(Task task)
     switch(task.type){
 
         case TASK::FWUPDATE:
-            Logger::Instance()->Debug("FW update required, ");
-            Logger::Instance()->Debug("FW download URL: " + task.data);
+            Logger::Instance()->Debug("FW update required, FW download URL: ");
+            Logger::Instance()->Debugln(task.data);
             // TODO : Update the FW
             delay(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
             break;
       
         case TASK::CNFGUPDATE:
-            Logger::Instance()->Debug("Config update required, ");
-            Logger::Instance()->Debug("Config download URL: " + task.data);
+            Logger::Instance()->Debug("Config update required, Config download URL: ");
+            Logger::Instance()->Debugln(task.data);
             // TODO : Update the Config
             delay(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
