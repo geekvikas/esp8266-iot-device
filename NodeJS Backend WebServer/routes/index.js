@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 /* GET home page. */
 router.post('/', function(req, res, next) {
   console.log(req);
-  res.json({status:"success",message: {type:"LED",data:"10101010101010",value:500}});
+  res.json({status:"success",message: {type:"LED",data:"1010101010101010101010",value:100}});
 });
 
 module.exports = router;
