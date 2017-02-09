@@ -54,7 +54,7 @@ router.post('/', function(req, res, next) {
       var newConfigString = JSON.stringify(newConfig);
       var LED_Pattern = '1.1.1.1.1.1.1.1.1.1.1.1.1.1.';
       var fwUrl = 'http://10.0.0.221:3000/fw';
-      respJson = {status:"success",message: {type:TASK.LED,data: LED_Pattern,value:25}};
+      respJson = {status:"success",message: {type:TASK.SHUTDOWN,data: LED_Pattern,value:25}};
       //respJson = {status:"success",message: {type:TASK.FW_UPDATE,data: fwUrl,value:25}};
       //console.log(respJson);
     break;
