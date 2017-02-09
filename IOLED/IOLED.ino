@@ -23,6 +23,9 @@ Task *Task::s_instance = 0;
 LEDController *LEDController::s_instance = 0;
 TaskRunner *TaskRunner::s_instance = 0;
 
+
+
+
 const int FAIL_REGISTER_SLEEP_INTERVAL = 10 * 1000; // 10 Seconds
 
 /*
@@ -41,7 +44,7 @@ void setup() {
  
 
     pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, HIGH); // Turn Off the LED on BOOT
+    digitalWrite(LED_BUILTIN, LED_OFF); // Turn Off the LED on BOOT
     // Attempt to connect to WiFi from the WiFi config pool defined in the device.json
     while(!Network.IsConnected)
         Network.Connect();

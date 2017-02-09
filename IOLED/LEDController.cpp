@@ -3,26 +3,34 @@
 
 
 #include "LEDController.h"
-const int MIN_LED_INTERVAL      = 10;       // 10 Milliseconds
+const int MIN_LED_INTERVAL      = 25;       // 10 Milliseconds
 const int MAX_LED_INTERVAL      = 60000;    // 60 Seconds
 const int DEFAULT_LED_INTERVAL  = 2000;     // 2 Seconds
+const int MIN_LOOP_COUNT        = 1;       // 1 Loop
 
-void LEDController::PlayPattern(int PIN, String Pattern, int interval)
+
+void LEDController::PlayPattern(int PIN, String Pattern, int Interval)
 {
-    if(interval<MIN_LED_INTERVAL || interval>MAX_LED_INTERVAL)
-        interval = DEFAULT_LED_INTERVAL;
+    return PlayPattern(PIN,Pattern,Interval,MIN_LOOP_COUNT);
+}
+
+void LEDController::PlayPattern(int PIN, String Pattern, int Interval, int LoopCount)
+{
+    if(Interval < MIN_LED_INTERVAL || Interval > MAX_LED_INTERVAL)
+        Interval = DEFAULT_LED_INTERVAL;
         
     pinMode(PIN, OUTPUT); 
-    byte bytes[Pattern.length()];
-    Pattern.getBytes(bytes, Pattern.length());
 
-    int i = 0;
-    for (int i = 0; i < Pattern.length(); i++){
-        if(bytes[i]=='0')
-            digitalWrite(PIN, HIGH);    // Turn OFF the LED
-        else
-            digitalWrite(PIN, LOW);     // Turn ON the LED
+    int patternIdx = 0, loopIdx;
 
-        SysUtils::Instance()->Sleep(interval);            // Sleep for a predefined interval
+    for(int loopIdx = 0; loopIdx<LoopCount; loopIdx++){         // Run the pattern for LoopCount times
+        for (int patternIdx = 0; patternIdx < Pattern.length(); patternIdx++){
+            if(Pattern.charAt(patternIdx) == '1')
+                digitalWrite(PIN, LED_ON);    
+            else
+                digitalWrite(PIN, LED_OFF);     
+
+            SysUtils::Instance()->Sleep(Interval);            // Sleep for a predefined interval
+        }
     }
 }

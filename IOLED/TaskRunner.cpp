@@ -15,7 +15,7 @@ void TaskRunner::Run(Task task)
         case TASK::FW_UPDATE:
             Logger::Instance()->Debug("FW update required, FW download URL: ");
             Logger::Instance()->Debugln(task.data);
-            // TODO : Update the FW
+            Device::Instance()->FirmwareUpdate(task.data);
             SysUtils::Instance()->Sleep(MIN_SLEEP_TIME);      
             Logger::Instance()->Debugln("Woke up from Sleep");
             break;

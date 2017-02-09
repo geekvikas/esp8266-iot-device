@@ -12,8 +12,8 @@ class ServerUtils {
 private:
   HTTPClient __http;
 	static ServerUtils *s_instance;
-
-	
+	int failHttpCount;
+	const int MAX_FAIL_HTTP_COUNT = 5;
 public:
 	
 	String GenerateMessage(ClientMessageClass);

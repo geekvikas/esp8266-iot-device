@@ -1,3 +1,14 @@
+/*
+Filename:   ClientMessage
+Purpose :   This is a helper class to generate the ClientMessageClass objects 
+            with the help of MESSAGE type & helping String of data.
+
+Returns :   ClientMessageClass
+
+
+
+*/
+
 #include "ClientMessage.h"
 
 ClientMessageClass ClientMessageClass::Get(MESSAGE msg , String data){

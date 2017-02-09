@@ -7,13 +7,13 @@ bool NetworkClass::Connect()
     Logger::Instance()->Debugln("Entering NetworkClass::Connect");
 
     // Set the LED to OFF
-    digitalWrite(LED_BUILTIN, HIGH); 
+    digitalWrite(LED_BUILTIN, LED_OFF); 
 
     // Return true if its already connected
     if(__WiFiMulti.run() == WL_CONNECTED){
       IsConnected = true;
       Logger::Instance()->Debugln("NetworkClass::Connect - Connected");
-      digitalWrite(LED_BUILTIN, LOW);   // Turn ON the LED to show that we are connected
+      digitalWrite(LED_BUILTIN, LED_ON);   // Turn ON the LED to show that we are connected
       return IsConnected;
     }
     
@@ -34,9 +34,9 @@ bool NetworkClass::Connect()
     while(__WiFiMulti.run() != WL_CONNECTED) {
       Logger::Instance()->Debug(".");
       //sleep for 1 seconds while we connect to WiFi and simulate by blinking the BUILTIN light
-      digitalWrite(LED_BUILTIN, HIGH); // Turn the LED off by making the voltage HIGH
+      digitalWrite(LED_BUILTIN, LED_OFF); // Turn the LED off by making the voltage HIGH
       SysUtils::Instance()->Sleep(500);                      // Wait for a second
-      digitalWrite(LED_BUILTIN, LOW);  // Turn the LED on by making the voltage LOW
+      digitalWrite(LED_BUILTIN, LED_ON);  // Turn the LED on by making the voltage LOW
       SysUtils::Instance()->Sleep(500);     
     }
 
@@ -44,7 +44,7 @@ bool NetworkClass::Connect()
     if(__WiFiMulti.run() == WL_CONNECTED){
       IsConnected = true;
       Logger::Instance()->Debugln("Connected to WiFi");
-      digitalWrite(LED_BUILTIN, LOW);  // Turn the LED on by making the voltage LOW to show that we are connected now
+      digitalWrite(LED_BUILTIN, LED_ON);  // Turn the LED on by making the voltage LOW to show that we are connected now
     }
     else
       IsConnected = false;

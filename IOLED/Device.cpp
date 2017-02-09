@@ -4,6 +4,18 @@
 
 #include "Device.h"
 
+bool Device::FirmwareUpdate(String url){
+    Logger::Instance()->Debugln("Entering DeviceClass::FirmwareUpdate");
+    bool retVal = false;
+    String deviceInfo = Device::Instance()->GetDeviceInfo();
+    String firmwareInfo = Device::Instance()->GetFirmwareInfo();
+    String params = "{\"firmwareInfo\":" + firmwareInfo + ",\"deviceInfo\":" + deviceInfo + "}";
+    ESPhttpUpdate.update(url,params);
+
+    Logger::Instance()->Debugln("Entering DeviceClass::FirmwareUpdate");
+    return retVal;
+}
+
 void Device::Sleep(unsigned int interval){
     delay(interval);
 }
@@ -15,16 +27,16 @@ bool Device::Register()
     
     if(++RegisterCheckSkipCount<RegisterCheckSkipLimit && Device::Instance()->DeviceId.length()>0){
         Logger::Instance()->Debugln("DeviceClass::Register - Registration has not expired");
-        retValue = true;
     }
     else{
         Logger::Instance()->Debugln("DeviceClass::Register - Registration Renew Complete");
         RegisterCheckSkipCount = 0;
-        
+        Device::Instance()->DeviceId = "";
         TaskRunner::Instance()->Run(ServerUtils::Instance()->SendMessage(ClientMessage.Get(MESSAGE::REGISTER,Device::Instance()->DeviceId)));
-        retValue = true;
     }
     
+    if(Device::Instance()->DeviceId.length()>0)
+        retValue = true;
     
     Logger::Instance()->Debugln("Exiting DeviceClass::Register");    
     

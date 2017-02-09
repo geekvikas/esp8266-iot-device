@@ -1,5 +1,6 @@
 #ifndef DEVICE_H
 #define DEVICE_H
+#include <ESP8266httpUpdate.h>
 #include "ClientMessage.h"
 #include "ServerUtils.h"
 #include "TaskRunner.h"
@@ -16,7 +17,7 @@ private:
 	static Device *s_instance;
   
 public:
-	
+	bool FirmwareUpdate(String);
 	bool Register();
 	String GetDeviceInfo();
 	String GetFirmwareInfo();

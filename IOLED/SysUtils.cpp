@@ -3,6 +3,17 @@
 
 #include "SysUtils.h"
 
+
+
+void SysUtils::PlayLEDCode(LEDCODE ledCode)
+{
+    //Logger::Instance()->Debugln("Entering SysUtils::PlayLEDCode");
+    String pattern = LEDCODE_Value[ledCode];
+    return LEDController::Instance()->PlayPattern(LED_BUILTIN, pattern, 0);
+    //Logger::Instance()->Debugln("Exiting SysUtils::PlayLEDCode");
+    
+}
+
 void SysUtils::Sleep(unsigned int interval)
 {
     //Logger::Instance()->Debugln("Entering SysUtils::Sleep");

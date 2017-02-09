@@ -118,10 +118,11 @@ String Config::Get(CONFIG_KEY configKey)
 
 bool Config::FactoryReset()
 {
+    bool retVal = false;
     Logger::Instance()->Debugln("Entering Config::FactoryReset");
-    SPIFFS.remove(CONFIG_FILE_NAME);
+    retVal = SPIFFS.format();
     Logger::Instance()->Debugln("Exiting Config::FactoryReset");
-    return true;
+    return retVal;
 }
 
 

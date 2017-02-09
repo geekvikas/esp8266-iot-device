@@ -35,12 +35,34 @@ Task ServerUtils::SendMessage(ClientMessageClass msg)
     
     Logger::Instance()->Debugln(sURL);
     
+    // Reset the counter to ZERO
+    failHttpCount = 0;
+
     // Call the server and get the response back for parsing
-    response = Http::Instance()->Post(sURL,packet);
-    if(response.length()==0){
-        sURL = Config::Instance()->DEFAULT_EP_URL;
+    while(failHttpCount++<=MAX_FAIL_HTTP_COUNT && response.length()==0){
+        Logger::Instance()->Debugln("Trying to connect... attempt "  + failHttpCount);
         response = Http::Instance()->Post(sURL,packet);
     }
+    
+    
+    // In case of FAILURE to get response from the Endpoint defined in Config
+    // Temporarily try to get the data from DEFAULT_EP_URL
+    if(response.length()==0 && Config::Instance()->DEFAULT_EP_URL != sURL){
+        sURL = Config::Instance()->DEFAULT_EP_URL;
+        
+        // Reset the counter to retry with DEFAULT_EP_URL
+        failHttpCount = 0;  
+        
+        while(failHttpCount++<=MAX_FAIL_HTTP_COUNT && response.length()==0){
+            Logger::Instance()->Debugln("Trying to connect... attempt "  + failHttpCount);
+            response = Http::Instance()->Post(sURL,packet);
+        }
+    }
+
+
+
+    
+    failHttpCount = 0;    
 
     Logger::Instance()->Debugln("Server Response: "  + response);
     
