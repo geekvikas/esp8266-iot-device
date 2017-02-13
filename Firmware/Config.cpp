@@ -49,16 +49,19 @@ bool Config::UpdateConfig(String config){
   String new_apKey = String((const char *)root[CONFIG_VALUE[AP_KEY]]);
   String new_epURL = String((const char *)root[CONFIG_VALUE[EP_URL]]);
 
-  if(!(new_apName.length()>0 && new_apKey.length()>0 && new_epURL.length()>0)){
+  if(!(new_apName.length()>0))
+    root[CONFIG_VALUE[CONFIG_KEY::AP_NAME]] = Get(CONFIG_KEY::AP_NAME);
+
+  if(!(new_apKey.length()>0))
+    root[CONFIG_VALUE[CONFIG_KEY::AP_KEY]] = Get(CONFIG_KEY::AP_KEY);
+  
+  if(!(new_epURL.length()>0))
+    root[CONFIG_VALUE[CONFIG_KEY::EP_URL]] = Get(CONFIG_KEY::EP_URL);
+  
+   if(!(new_apKey.length()>0 || new_apKey.length()>0 || new_epURL.length()>0)){
     Logger::Instance()->Debugln("Config::UpdateConfig - Invalid configuration provided");
     return false;
   }
-
-  if(new_apName == Get(AP_NAME) && new_apKey == Get(AP_KEY) && new_epURL == Get(EP_URL)){
-    Logger::Instance()->Debugln("Config::UpdateConfig - No Change Required");
-    return true;
-  }
-  
   
   File configFile = SPIFFS.open(CONFIG_FILE_NAME, "w");
   if (!configFile) {

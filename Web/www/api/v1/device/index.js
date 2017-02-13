@@ -1,11 +1,13 @@
 var express = require('express');
 var Device = require(global.appRoot + '/data/models/v1/device');
+var deviceManager = require(global.appRoot + '/lib/deviceManager');
+
 var app = module.exports = express();
 
 /* GET home page. */
 app.get('/status', function(req, res, next) {
   res.json({
-        status: "OK"
+        status: "success"
               });
 
 });
@@ -22,13 +24,33 @@ app.get('/', function(req, res, next) {
 // find and return the devices where the Id matches with the first parameter
 app.get('/:id',function(req,res,next){
 
-    var id = req.params.id;
+  var id = req.params.id;
 
   Device.findById({_id:req.params.id}, function(err,device){
     res.json(
       {
         device
       });  
+    });
+});
+
+// find and return the devices where the Id matches with the first parameter
+app.get('/chipid/:id',function(req,res,next){
+
+  var id = req.params.id;
+ 
+  Device.find({'deviceInfo.chipId':id}, function(err,device){
+      if(!err){
+        res.json(
+          {
+            device
+          });  
+      }
+      else
+        {
+          res.jsonp(err);
+        }
+
     });
 });
 
@@ -44,7 +66,7 @@ app.put('/:id',function(req,res,next){
     
     device.save(function(err){
       if(!err)
-        status = "ok";
+        status = "success";
       else
         status = err;
       res.json({'status': status});
@@ -56,20 +78,77 @@ app.put('/:id',function(req,res,next){
 app.post('/',function(req,res,next){
   
   
+  var respJson = {};
+  var devInfo = deviceManager.GetDeviceInfo(req);
+  console.log("Request Type: " + devInfo.message.type);
+  var fwUrl = 'http://10.0.0.221:3000/fw.bin';
+  var newConfig = {EP_URL:"http://10.0.0.221:3000/api/v1/device"};
+  var newConfigString = JSON.stringify(newConfig);
+
   var status = "error";
   var device = new Device();
-    device.name = req.body.name;
-    device.description = req.body.description;
-    device.save(function(err){
-    if(!err)
-      status = "ok";
-    else
-      status = err;
-    res.json({'status': status});
-  });  
+
+  if(devInfo.firmwareInfo.timestamp != '201702130200')
+  {  
+    respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.FW_UPDATE,fwUrl,0);
+    res.json(respJson);
+    return;
+  }
   
-    
+
+
+  if(devInfo.message.type == deviceManager.REQUEST_TYPE.REGISTRATION)
+  {
+    Device.find({'deviceInfo.chipId':devInfo.deviceInfo.chipId}, function(err,device){
+      if(!err && Object.keys(device).length==1 && device[0].deviceInfo.chipId == devInfo.deviceInfo.chipId){
+        // Device with same chipId found in the system, return the same record back
+        console.log('Existing record found for this device: ' + device[0]._id);
+        respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.REG_OK,device[0]._id);    
+        res.json(respJson);
+      }
+      else
+      {
+        device = new Device(req.body);
+        device.save(function(err){
+          if(!err){
+            // Device is not in the system, so register it 
+            console.log('New record created for this device: ' + device._id);
+            respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.REG_OK,device._id);    
+            res.json(respJson);
+          }
+          else{
+            respJson = deviceManager.GenerateMessage("error",deviceManager.TASK.REG_INVALID);    
+            console.log('Error in creating a new record for this device: ' + err);
+            res.json(respJson);
+          }
+        }); 
+      }
+    });
+  }
+  else if(devInfo.message.type == deviceManager.REQUEST_TYPE.HEART_BEAT)
+  {
+    //Check if device is still registered in the database
+    Device.find({'deviceInfo.chipId':devInfo.deviceInfo.chipId}, function(err,device){
+      if(!err && Object.keys(device).length==1 && device[0].deviceInfo.chipId == devInfo.deviceInfo.chipId){
+        respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.NOP);
+      }
+      else{
+        // If device is not registered then force re-registration by sending REG_INVALID response
+        respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.REG_INVALID);
+      }
+      res.json(respJson);
+    });
+   
+  }
+  else{
+    respJson = deviceManager.GenerateMessage("error",deviceManager.TASK.NOP);
+    res.json(respJson);
+  }
+
 });
+  
+
+    
 
 
 // delete an existing Device
@@ -84,7 +163,7 @@ app.delete('/:id',function(req,res,next){
       status = err;
 
     if(device)
-      status="ok";
+      status="success";
     
     res.json({'status': status});
   });

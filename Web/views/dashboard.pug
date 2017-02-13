@@ -10,7 +10,7 @@ block content
             h4#editDeviceHeader.modal-title(ng-show='device._id') Edit Device
           .modal-body
             label(for='txtDeviceName') Device Name
-            input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device name' ng-model='device.name') 
+            input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device name' ng-model='device._id') 
             label(for='txtDeviceDescription') Device Desctiption
             input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device description' ng-model='device.description') 
           .modal-footer
@@ -28,11 +28,12 @@ block content
    
     #deviceItems.col-xs-12.well.well-sm(ng-repeat='device in devices')
       #deviceData.pull-left.col-xs-10
-        .h3.list-group-item-heading {{device.name}} 
-        .h5.list-group-item-text {{device.description}} 
+        .h3.list-group-item-heading {{device._id}} 
+        .h5.list-group-item-text {{device.firmwareInfo.version}} ({{device.firmwareInfo.flavor}}) - {{device.firmwareInfo.comments}}
+        .h5.list-group-item-text 
       #deviceButtons.pull-right.btn-group
         button.btn.btn-xs.btn-warning(ng-click='edit(device)' data-toggle='modal' data-target='#deviceModal') Edit
         button.btn.btn-xs.btn-danger(ng-click='remove(device)') Remove
     .container.container-table.well(ng-hide='devices.length>0') 
       .row.vertical-center-row
-        .text-center.h1 Oops, no device data found!
+        .text-center.h1 Oops, no devices found.

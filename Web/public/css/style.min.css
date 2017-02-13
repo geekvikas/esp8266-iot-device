@@ -315,16 +315,6 @@
 .pace.pace-inactive {
   display: none; }
 
-@font-face {
-  font-family: 'GrubDesi';
-  src: url("/fonts/grubdesi-webfont.woff") format("woff"); }
-
-.site-logo {
-  font-family: 'GrubDesi', Raleway, Arial, sans-serif;
-  color: #fff !important;
-  font-size: 30px !important;
-  padding-top: 20px !important; }
-
 .social {
   position: absolute;
   width: 100%;

@@ -1,5 +1,6 @@
 var express = require('express');
 var app = module.exports = express();
+var deviceManager = require('./deviceManager');
 
 var webTitle = "IOLED";
 var webDescription = "IOLED";
@@ -7,6 +8,7 @@ var webLogoURL = "";
 var fbURL = "http:///";
 var gpURL = "http:///";
 var igURL = "http:///";
+
 
 /* load up Dashboard */
 app.get('/', function(req, res, next) {
@@ -19,3 +21,5 @@ app.get('/', function(req, res, next) {
       igURL:igURL
     });
 });
+
+app.use(deviceManager);
