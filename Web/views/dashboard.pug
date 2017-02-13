@@ -3,36 +3,103 @@ block content
   #divContent(ng-controller='DeviceAdminController')
     #deviceModal.modal.fade(role='dialog', style='display:none;' )
       .modal-dialog
-        .modal-content
+        .modal-content.row
           .modal-header
             button.close(data-dismiss='modal') ×
-            h4#addDeviceHeader.modal-title(ng-show='!device._id') Add a new Device
-            h4#editDeviceHeader.modal-title(ng-show='device._id') Edit Device
-          .modal-body
-            label(for='txtDeviceName') Device Name
-            input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device name' ng-model='device._id') 
-            label(for='txtDeviceDescription') Device Desctiption
-            input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device description' ng-model='device.description') 
+            h4#editDeviceHeader.modal-title(ng-show='device._id') Device Details
+          .modal-body.col-xs-12
+            #bodyContent
+              #firmwareInfo
+                h4 Firmware Information
+                #leftCol.col-xs-6
+                  div 
+                    b Version: 
+                    | {{device.firmwareInfo.version}} 
+                  div 
+                    b Flavor: 
+                    | {{device.firmwareInfo.flavor}}
+                #rightCol.col-xs-6
+                  div 
+                    b Timestamp: 
+                    | {{device.firmwareInfo.timestamp}}
+                  div 
+                    b Comments: 
+                    | {{device.firmwareInfo.comments}}
+              #deviceInfo
+                h4 Device Information
+                #leftCol1.col-xs-6
+                  div 
+                    b DeviceId: 
+                    | {{device.deviceInfo.deviceId}}
+                  div 
+                    b ChipId: 
+                    | {{device.deviceInfo.chipId}}
+                  div 
+                    b FlashChipId: 
+                    | {{device.deviceInfo.flashChipId}}
+                  div 
+                    b FlashChipSizeByChipId: 
+                    | {{device.deviceInfo.flashChipSizeByChipId}}
+                  div 
+                    b SdkVersion: 
+                    | {{device.deviceInfo.sdkVersion}}
+                  div 
+                    b CoreVersion: 
+                    | {{device.deviceInfo.coreVersion}}
+                  div 
+                    b BootVersion: 
+                    | {{device.deviceInfo.bootVersion}}
+                  div 
+                    b SketchSize: 
+                    | {{device.deviceInfo.sketchSize}}
+                  div 
+                    b SketchMD5: 
+                    | {{device.deviceInfo.sketchMD5}}
+                  div 
+                    b BootMode: 
+                    | {{device.deviceInfo.bootMode}}
+                #rightCol1.col-xs-6
+                  div 
+                    b CpuFreq: 
+                    | {{device.deviceInfo.cpuFreq}}
+                  div 
+                    b Vcc: 
+                    | {{device.deviceInfo.vcc}}
+                  div 
+                    b FreeHeap: 
+                    | {{device.deviceInfo.freeHeap}}
+                  div 
+                    b FlashChipRealSize: 
+                    | {{device.deviceInfo.flashChipRealSize}}
+                  div 
+                    b FlashChipSize: 
+                    | {{device.deviceInfo.flashChipSize}}
+                  div 
+                    b FlashChipSpeed: 
+                    | {{device.deviceInfo.flashChipSpeed}}
+                  div 
+                    b FlashChipMode: 
+                    | {{device.deviceInfo.flashChipMode}}
+                  div 
+                    b ResetReason: 
+                    | {{device.deviceInfo.resetReason}}
+                  div 
+                    b ResetInfo: 
+                    | {{device.deviceInfo.resetInfo}}
           .modal-footer
-            .btn-group.pull-right(ng-show='!device._id')
-              button#addDeviceButton.btn.btn-sm.btn-success(ng-click='add(device)' data-dismiss='modal') Add
-              button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
-            .btn-group.pull-right(ng-show='device._id')
-              button#updateDeviceButton.btn.btn-sm.btn-warning(ng-click='update(device)' data-dismiss='modal') Update
-              button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
+            button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
     
-    .pull-left.h1.hidden-xs #{title}
-    #buttonGroup.btn-group.pull-right(style="padding-bottom:5px;padding-top:25px;")
-      button.btn.btn-sm.btn-success(ng-click='deselect()' data-toggle='modal' data-target='#deviceModal')  Add new
+    .h1.hidden-xs=title
+    #buttonGroup.row.btn-group.col-xs-12(style="padding-bottom:5px;padding-top:25px;")
       button.btn.btn-sm.btn-danger(ng-click='removeAll()')  Remove all
-   
-    #deviceItems.col-xs-12.well.well-sm(ng-repeat='device in devices')
-      #deviceData.pull-left.col-xs-10
-        .h3.list-group-item-heading {{device._id}} 
-        .h5.list-group-item-text {{device.firmwareInfo.version}} ({{device.firmwareInfo.flavor}}) - {{device.firmwareInfo.comments}}
-        .h5.list-group-item-text 
+    #deviceItems.col-xs-4.well.well-sm(ng-repeat='device in devices')
+      #deviceData.col-xs-10
+        .h3.list-group-item-heading Chip Id: {{device.deviceInfo.chipId}} 
+        .h5.list-group-item-text DeviceId: {{device._id}}
+        .h5.list-group-item-text Firmware: {{device.firmwareInfo.version}} ({{device.firmwareInfo.flavor}})
+        .h5.list-group-item-text Comments: {{device.firmwareInfo.comments}}
       #deviceButtons.pull-right.btn-group
-        button.btn.btn-xs.btn-warning(ng-click='edit(device)' data-toggle='modal' data-target='#deviceModal') Edit
+        button.btn.btn-xs.btn-info(ng-click='edit(device)' data-toggle='modal' data-target='#deviceModal') Details
         button.btn.btn-xs.btn-danger(ng-click='remove(device)') Remove
     .container.container-table.well(ng-hide='devices.length>0') 
       .row.vertical-center-row

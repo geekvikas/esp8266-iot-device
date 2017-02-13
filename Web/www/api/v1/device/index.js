@@ -61,8 +61,7 @@ app.put('/:id',function(req,res,next){
   var status = "error";
 
   Device.findById({_id:req.params.id}, function(err,device){
-    device.name = req.body.name;
-    device.description = req.body.description;
+    device = new Device(req.body);
     
     device.save(function(err){
       if(!err)
