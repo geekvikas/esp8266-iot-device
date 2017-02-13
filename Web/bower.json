@@ -1,0 +1,37 @@
+{
+  "name": "grub.desi",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Vikas Verma"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular": "^1.6.0",
+    "angular-websocket": "angular-bluebird#^2.0.0",
+    "angular-route": "^1.6.0",
+    "bluebird": "^3.4.6",
+    "angular-bluebird-promises": "^1.0.2",
+    "angular-resource": "^1.6.1",
+    "angular-animate": "^1.6.1",
+    "AngularJS-Toaster": "toaster#^2.1.0",
+    "ngprogress": "^1.1.3",
+    "angular-filter": "^0.5.14",
+    "angular-ui-select": "^0.19.6",
+    "ng-file-upload": "^12.2.13",
+    "angular-sanitize": "^1.6.1",
+    "please-wait": "^0.0.5",
+    "bootstrap": "^3.3.7",
+    "bootstrap-select": "^1.12.2"
+  }
+}

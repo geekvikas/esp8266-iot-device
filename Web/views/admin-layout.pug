@@ -1,0 +1,31 @@
+extends base-layout
+block sub-layout
+  body(ng-cloak ng-app = 'grub.desi.admin')
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container.container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.site-logo.navbar-brand(href='/') grubdesi
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/admin/menu') Menu Maker
+            li.dropdown
+              a.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false') Master Data Manager
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='/admin/master/menu') Menu Manager
+                li
+                  a(href='/admin/master/category') Category Manager
+                li
+                  a(href='/admin/master/portion') Portion Manager
+    #padding(style="padding-top:20px")
+    #container.container-fluid
+      block content
+    #loaderDiv(data-loading)
+    toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}")

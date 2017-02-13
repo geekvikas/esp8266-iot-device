@@ -1,0 +1,37 @@
+{
+  "name": "grub_desi",
+  "description": "Grub Desi Website",
+  "version": "0.0.1",
+  "scripts": {
+    "init": "npm install && bower install && gulp",
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.8.2",
+    "bower": "^1.7.9",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "jade": "^1.11.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.7.4",
+    "morgan": "^1.1.1",
+    "multer": "^1.2.1",
+    "node-uuid": "^1.4.7",
+    "nodemailer": "^2.5.0",
+    "nodemon": "^1.9.2",
+    "pug": "^2.0.0-beta11",
+    "serve-favicon": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp-bower": "0.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.4",
+    "gulp-util": "^3.0.7"
+  }
+}

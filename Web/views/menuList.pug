@@ -1,0 +1,81 @@
+extends admin-layout
+block content
+  h2.page-header.text-capitalize.hidden-print Satisfy Your Taste Buds
+  h1.page-header.text-capitalize.visible-print-block Grub Desi - Menu Printout
+  .row.visible-print-block
+    .col-lg-6.col-sm-12.col-md-6.col-xs-12
+      h3 Please feel free to contact us for any catering needs
+      address
+        div Phone: (408)-466-8192 , (669)-237-0002
+        div Email: enquiry@grub.desi
+  div(ng-controller='MenuAdminController')
+    #leftNavBar.col-sm-3(style="max-width:250px")
+      .panel-group
+        .panel.panel-default
+          .panel-heading
+            h4.panel-title
+              a.accordion-toggle(data-toggle="collapse"  href="#collapse1") Select Menu Type
+          #collapse1.panel-collapse.collapse.in
+            .panel-body
+              .checkbox
+                label
+                  input(type='checkbox', value='selectAll' checked='') 
+                  | Select All
+                hr(style="padding:0px;margin-bottom:3px")
+              .checkbox(ng-repeat="menu in menuMasters | unique: 'menuName'")
+                label
+                  input(type='checkbox', value='{{menu.menuName}}' checked='') 
+                  {{menu.menuName}}
+        .panel.panel-default
+          .panel-heading
+            h4.panel-title
+              a.accordion-toggle(data-toggle="collapse"  href="#collapse2") Select Category
+          #collapse2.panel-collapse.collapse.in
+            .panel-body 
+              .checkbox(ng-repeat="category in categories | unique: 'categoryName'")
+                label
+                  input(type='checkbox', value='{{category.categoryName}}' checked='') 
+                  {{category.categoryName}}
+        .panel.panel-default
+          .panel-heading
+            h4.panel-title
+              a.accordion-toggle(data-toggle="collapse"  href="#collapse3") Select Portion
+          #collapse3.panel-collapse.collapse.in
+            .panel-body 
+              .checkbox(ng-repeat="portion in portions | unique: 'portionName'")
+                label
+                  input(type='checkbox', value='{{portion.portionName}}' checked='')
+                  {{portion.portionName}}
+    #rightMenuBar.col-sm-9
+      #menuItems.col-sm-4(ng-repeat="menu in selectedMenus()" )
+        #thumbnail 
+          img.img-responsive.menuItem-Thumbnail(src='/images/menuitems/{{menu.imageFilename || menuDefaultImage}}' alt='{{menu.itemName}}') 
+          //- .after {{menu.itemDescription || 'No description available'}} 
+        #menuHighlights.col-xs-12
+          #itemName.pull-left
+            .h3.list-group-item-heading {{menu.itemName}} 
+            .label.label-primary {{menu.menuName}}
+        #portions.col-xs-12
+          span(ng-repeat="p in menu.portion | filter: greaterThan('portionPrice',0)")  
+            .label.label-default {{p.portionName}} ${{p.portionPrice}}
+        //-#menuData.col-xs-12
+          label.h6.list-group-item-text.menuItem-Description {{menu.itemDescription || 'No description available'}} 
+        #menuButtons.btn-group.col-xs-12(style="padding-top:10px")
+          button.btn.btn-xs.btn-success(ng-click='addToCart(menu)' data-toggle='modal' data-target='#CartModel') Add To Cart
+        #hr.col-xs-12
+          hr
+//-        hr
+    .tab-content
+      div(ng-repeat="(key,menu) in (menus | groupBy: [menuName,category])", no-ng-class="$index==0?'tab-pane fade in active':'tab-pane fade'", no-id='{{menu.menuName}}')
+        div(ng-repeat='category in menu.category')
+          .text-primary.h4.col-xs-12.well.well-sm
+            | {{menu.menuName}} -> {{category.categoryName}}
+            .small.text-muted
+              br
+              | {{category.categoryDescription}}
+          .col-xs-12.col-sm-6.col-md-4.col-lg-3(ng-repeat='item in menus | filter: {_id:menu._id}', id='{{menu._id}}')
+            .bg-info
+              strong {{menu.itemName}}
+            div(ng-repeat="portion in menu.portion | filter: greaterThan('portionPrice',0)", id='portion._id}}')
+              .col-xs-6 {{portion.portionName}}
+              .text-right.col-xs-6 ${{portion.portionPrice}}

@@ -1,0 +1,7 @@
+.git
+NOT IN USE
+.\web\.sass-cache
+.\web\db
+.\web\node_modules
+.\web\bower_components
+

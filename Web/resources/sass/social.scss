@@ -1,0 +1,80 @@
+
+.social {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+
+.social .link {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-clip: content-box;
+  padding: 5px;
+  transition: .5s;
+  color: #D7D0BE;
+  //margin-left: 7px;
+  //margin-right: 7px;
+  text-shadow:
+    0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.2);
+  font-size: 20px;
+}
+
+.social .link span {
+  display: block;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.social .link:hover {
+  padding: 5px;
+  border: 1px dashed #D7D0BE;
+  color: white;
+  //margin-left: -5px;
+  transform: rotate(360deg);
+}
+
+.social .link.tarobites{
+  background: url("http://www.tarobites.com/wp-content/uploads/2016/06/Logo.png") center no-repeat;
+  background-size: 40px 40px; 
+}
+
+.social .link.google-plus {
+  background-color: tomato;
+  color: white;
+}
+
+.social .link.yelp {
+  background-color: #ED3D22;
+  color: white;
+}
+
+.social .link.instagram {
+  background-color: chocolate;
+  color: white;
+}
+
+.social .link.twitter {
+  background-color: #00ACEE;
+  color: white;
+}
+
+.social .link.facebook {
+  background-color: #3B5998;
+  color: white;
+}
+
+
+
+

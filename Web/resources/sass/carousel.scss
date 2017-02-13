@@ -1,0 +1,79 @@
+
+.carousel-overlay,.navbar {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.navbar {
+  top: 0;
+}
+
+.navbar-default.transparent {
+  background-color: transparent;
+}
+
+.slide1,.slide2,.slide3,.slide4,.slide5,.slide6,.slide7,.slide8 {
+  min-height: 550px;
+  background-size: cover;
+  background-position: center center;
+}
+
+.slide1 {
+  background-image: url('/images/banners/01.jpg');
+}
+
+.slide2 {
+  background-image: url('/images/banners/02.jpg');
+}
+
+.slide3 {
+  background-image: url('/images/banners/03.jpg');
+}
+
+.slide4 {
+  background-image: url('/images/banners/04.jpg');
+}
+
+.slide5 {
+  background-image: url('/images/banners/05.jpg');
+}
+
+.slide6 {
+  background-image: url('/images/banners/06.jpg');
+}
+
+.slide7 {
+  background-image: url('/images/banners/07.jpg');
+}
+
+.slide8 {
+  background-image: url('/images/banners/08.jpg');
+}
+
+.carousel.carousel-fade .item {
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -ms-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+  opacity: 1;
+}
+
+.carousel.carousel-fade .active.item {
+  opacity: 1;
+}
+
+.carousel.carousel-fade .active.left,.carousel.carousel-fade .active.right {
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.carousel-overlay {
+  bottom: 100px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+  font-size: 5em;
+}

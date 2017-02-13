@@ -1,0 +1,84 @@
+extends base-layout
+block sub-layout
+  body(ng-cloak ng-app = 'grubdesi')
+    #site-keywords.hidden(aria-hidden='true')
+      h1 indian food near me
+      h2 indian food
+      h2 bay area indian food delivery
+      h3 san jose best indian food
+      h3 free indian food delivery
+      h4 chicken tikka
+      h4 butter chicken
+      h5 butter naan
+      h5 Daal Makhani
+      h5 Chicken Curry
+      span
+        | Authentic Indian food to satisfy your taste buds. Freshly made and served hot to entire bay area. Call us for more information +1 408.466.8192
+        | Mutton Curry
+        | Laal Maas
+        | Daal Kachori
+        | Kanji Bade
+        | Daal Baati & Churma
+        | Rajasthani Gatta Curry
+        | Badi Papad Ki Subzi
+        | Authentic Indian food to satisfy your taste buds. Freshly made and served hot to entire bay area. Call us for more information +1 408.466.8192
+        | Rajasthani Bharvan Mirchi
+        | Royal Rajasthani Gatta Pulav
+        | Chilli Paneer Dry/Gravy
+        | Veg Manchurian Dry/Gravy
+        | Veg Fried Rice
+        | Veg Hakka Noodles
+        | Steamed Rice
+        | Veg Biryani
+        | Tawa Pulao
+        | Chicken Biryani
+        | Mutton Biryani
+        | Pav Bhaji
+        | Matar Kulchas
+        | Samosa Chaat
+        | Chole Bhature
+        | Authentic Indian food to satisfy your taste buds. Freshly made and served hot to entire bay area. Call us for more information +1 408.466.8192
+        | Kathi Rolls
+        | Idli Sambhar with Chutney
+        | Chapati
+        | Ajwain Poori
+        | Daal Ki Poori
+        | Plain Parantha
+        | Missa Parantha
+        | Pudina Parantha
+        | Mal Puda
+        | Shahi Tukda
+        | Double Ka Meetha
+        | Rice Kheer
+        | Moong Daal Halwa
+        | Authentic Indian food to satisfy your taste buds. Freshly made and served hot to entire bay area. Call us for more information +1 408.466.8192
+        | Walnut Brownie with Fudge Sauce
+        | Fruit Trifle Pudding
+        | Chicken Option in all the above Items (Small)
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.site-logo.navbar-brand(href='#/') grubdesi
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='http://www.tarobites.com/chef/neetu-laddha-grub-desi/', target='_blank') Order Food Online
+            li
+              a(href='#Menu') Catering Menu
+            li
+              a(href='#RecipeBook') Recipe Book
+            li
+              a(href='#Location') Pickup Location
+            li
+              a(href='#Enquiry') Contact
+            li
+              a(href='#About') About
+    .container-fluid
+      block content
+    #loaderDiv(data-loading)
+    toaster-container(toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}")

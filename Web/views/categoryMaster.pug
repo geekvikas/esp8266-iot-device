@@ -1,0 +1,38 @@
+extends admin-layout
+block content
+  #divContent(ng-controller='CategoryAdminController')
+    #CategoryModal.modal.fade(role='dialog', style='display:none;' )
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(data-dismiss='modal') ×
+            h4#addCategoryHeader.modal-title(ng-show='!category._id') Add a new Category
+            h4#editCategoryHeader.modal-title(ng-show='category._id') Edit Category
+          .modal-body
+            label(for='txtCategoryName') Category Name
+            input.form-control(id='txtCategoryName' type='text' placeholder='Enter the Category name' ng-model='category.categoryName') 
+            label(for='txtCategoryDescription') Category Desctiption
+            input.form-control(id='txtCategoryName' type='text' placeholder='Enter the Category description' ng-model='category.categoryDescription') 
+          .modal-footer
+            .btn-group.pull-right(ng-show='!category._id')
+              button#addCategoryButton.btn.btn-sm.btn-success(ng-click='add(category)' data-dismiss='modal') Add
+              button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
+            .btn-group.pull-right(ng-show='category._id')
+              button#updateCategoryButton.btn.btn-sm.btn-warning(ng-click='update(category)' data-dismiss='modal') Update
+              button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
+    
+    .pull-left.h1.hidden-xs #{title}
+    #buttonGroup.btn-group.pull-right(style="padding-bottom:5px;padding-top:25px;")
+      button.btn.btn-sm.btn-success(ng-click='deselect()' data-toggle='modal' data-target='#CategoryModal')  Add new
+      button.btn.btn-sm.btn-danger(ng-click='removeAll()')  Remove all
+   
+    #categoryItems.col-xs-12.well.well-sm(ng-repeat='category in categories')
+      #categoryData.pull-left.col-xs-10
+        .h3.list-group-item-heading {{category.categoryName}} 
+        .h5.list-group-item-text {{category.categoryDescription}} 
+      #categoryButtons.pull-right.btn-group
+        button.btn.btn-xs.btn-warning(ng-click='edit(category)' data-toggle='modal' data-target='#categoryModal') Edit
+        button.btn.btn-xs.btn-danger(ng-click='remove(category)') Remove
+    .container.container-table.well(ng-hide='categories.length>0') 
+      .row.vertical-center-row
+        .text-center.h1 Oops, no categories found!
