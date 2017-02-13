@@ -8,7 +8,7 @@ var routeManager = require('./route-manager');
 var app = express();
 var dbConnection = require('./data/connection.js')
 var mongoDBServer = process.env.DB_SERVER || 'localhost:27017';
-var mongoDBName = process.env.DB_NAME || 'grubdesi';
+var mongoDBName = process.env.DB_NAME || 'ioled';
 var mongoDBConnectionString = 'mongodb://' + mongoDBServer + '/' + mongoDBName;
 
 

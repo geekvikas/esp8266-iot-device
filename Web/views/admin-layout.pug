@@ -1,6 +1,6 @@
 extends base-layout
 block sub-layout
-  body(ng-cloak ng-app = 'grub.desi.admin')
+  body(ng-cloak ng-app = 'ioled.admin')
     .navbar.navbar-inverse.navbar-fixed-top
       .container.container-fluid
         .navbar-header
@@ -9,21 +9,21 @@ block sub-layout
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.site-logo.navbar-brand(href='/') grubdesi
+          a.site-logo.navbar-brand(href='/') IOLED
         .navbar-collapse.collapse
           ul.nav.navbar-nav
             li
-              a(href='/admin/menu') Menu Maker
-            li.dropdown
-              a.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false') Master Data Manager
-                span.caret
-              ul.dropdown-menu
-                li
-                  a(href='/admin/master/menu') Menu Manager
-                li
-                  a(href='/admin/master/category') Category Manager
-                li
-                  a(href='/admin/master/portion') Portion Manager
+              a(href='/') Device Master
+            //- li.dropdown
+            //-   a.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false') Master Data Manager
+            //-     span.caret
+            //-   ul.dropdown-menu
+            //-     li
+            //-       a(href='/admin/master/menu') Menu Manager
+            //-     li
+            //-       a(href='/admin/master/category') Category Manager
+            //-     li
+            //-       a(href='/admin/master/portion') Portion Manager
     #padding(style="padding-top:20px")
     #container.container-fluid
       block content

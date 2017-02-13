@@ -1,4 +1,4 @@
-  var app = angular.module('grub.desi.admin', ['ngResource',  'ngAnimate', 'toaster','angular.filter','ngFileUpload','ui.select','ngSanitize']);
+  var app = angular.module('ioled.admin', ['ngResource',  'ngAnimate', 'toaster','angular.filter','ngFileUpload','ui.select','ngSanitize']);
 
  
 
@@ -92,8 +92,8 @@
   }]);
   
   // Create a resource factory to access products table from database 
-  app.factory('Menu', function($resource) {
-    return $resource('/api/v1/menu/:id', { id: '@_id' }, {
+  app.factory('Device', function($resource) {
+    return $resource('/api/v1/device/:id', { id: '@_id' }, {
       update: { // We need to define this method manually as it is not provided with ng-resource
         method: 'PUT'
       }
@@ -101,31 +101,3 @@
   });
 
   
-  // Create a resource factory to access products table from database 
-  app.factory('Category', function($resource) {
-    return $resource('/api/v1/category/:id', { id: '@_id' }, {
-      update: { // We need to define this method manually as it is not provided with ng-resource
-        method: 'PUT'
-      }
-    });
-  });
-
-  
-  // Create a resource factory to access products table from database 
-  app.factory('Portion', function($resource) {
-    return $resource('/api/v1/portion/:id', { id: '@_id' }, {
-      update: { // We need to define this method manually as it is not provided with ng-resource
-        method: 'PUT'
-      }
-    });
-  });
-
-  
-  // Create a resource factory to access products table from database 
-  app.factory('MenuMaster', function($resource) {
-    return $resource('/api/v1/menuMaster/:id', { id: '@_id' }, {
-      update: { // We need to define this method manually as it is not provided with ng-resource
-        method: 'PUT'
-      }
-    });
-  });

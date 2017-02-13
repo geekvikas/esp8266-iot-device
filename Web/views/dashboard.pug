@@ -1,0 +1,38 @@
+extends admin-layout
+block content
+  #divContent(ng-controller='DeviceAdminController')
+    #deviceModal.modal.fade(role='dialog', style='display:none;' )
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(data-dismiss='modal') ×
+            h4#addDeviceHeader.modal-title(ng-show='!device._id') Add a new Device
+            h4#editDeviceHeader.modal-title(ng-show='device._id') Edit Device
+          .modal-body
+            label(for='txtDeviceName') Device Name
+            input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device name' ng-model='device.name') 
+            label(for='txtDeviceDescription') Device Desctiption
+            input.form-control(id='txtDeviceName' type='text' placeholder='Enter the Device description' ng-model='device.description') 
+          .modal-footer
+            .btn-group.pull-right(ng-show='!device._id')
+              button#addDeviceButton.btn.btn-sm.btn-success(ng-click='add(device)' data-dismiss='modal') Add
+              button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
+            .btn-group.pull-right(ng-show='device._id')
+              button#updateDeviceButton.btn.btn-sm.btn-warning(ng-click='update(device)' data-dismiss='modal') Update
+              button.btn.btn-sm.btn-danger(ng-click="reset()" data-dismiss='modal') Close
+    
+    .pull-left.h1.hidden-xs #{title}
+    #buttonGroup.btn-group.pull-right(style="padding-bottom:5px;padding-top:25px;")
+      button.btn.btn-sm.btn-success(ng-click='deselect()' data-toggle='modal' data-target='#deviceModal')  Add new
+      button.btn.btn-sm.btn-danger(ng-click='removeAll()')  Remove all
+   
+    #deviceItems.col-xs-12.well.well-sm(ng-repeat='device in devices')
+      #deviceData.pull-left.col-xs-10
+        .h3.list-group-item-heading {{device.name}} 
+        .h5.list-group-item-text {{device.description}} 
+      #deviceButtons.pull-right.btn-group
+        button.btn.btn-xs.btn-warning(ng-click='edit(device)' data-toggle='modal' data-target='#deviceModal') Edit
+        button.btn.btn-xs.btn-danger(ng-click='remove(device)') Remove
+    .container.container-table.well(ng-hide='devices.length>0') 
+      .row.vertical-center-row
+        .text-center.h1 Oops, no device data found!
