@@ -6,7 +6,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Copy app source
-COPY ./web /usr/src/app 
+COPY ./Web /usr/src/app 
 
 # Install app dependencies & run Gulp tasks
 
