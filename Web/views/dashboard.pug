@@ -92,7 +92,7 @@ block content
     .h1.hidden-xs=title
     #buttonGroup.row.btn-group.col-xs-12(style="padding-bottom:5px;padding-top:25px;")
       button.btn.btn-sm.btn-danger(ng-click='removeAll()')  Remove all
-    #deviceItems.col-xs-4.well.well-sm(ng-repeat='device in devices')
+    #deviceItems.col-xs-12.col-sm-4.well.well-sm(ng-repeat='device in devices')
       #deviceData.col-xs-10
         .h3.list-group-item-heading Chip Id: {{device.deviceInfo.chipId}} 
         .h5.list-group-item-text DeviceId: {{device._id}}
