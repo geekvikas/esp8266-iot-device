@@ -80,8 +80,8 @@ app.post('/',function(req,res,next){
   var respJson = {};
   var devInfo = deviceManager.GetDeviceInfo(req);
   console.log("Request Type: " + devInfo.message.type + ' , Timestamp: ' + devInfo.firmwareInfo.timestamp + ' , FW Version: ' + devInfo.firmwareInfo.version);
-  var fwUrl = 'https://dev.idnno.com/fw.bin';
-  var newConfig = {EP_URL:"https://dev.idnno.com/api/v1/device"};
+  var fwUrl = 'http://dev.idnno.com/fw.bin';
+  var newConfig = {AP_Name:"Eshanya",AP_Key:"eshanyaverma",EP_URL:"http://dev.idnno.com/api/v1/device"};
   var newConfigString = JSON.stringify(newConfig);
 
   var status = "error";
@@ -90,7 +90,7 @@ app.post('/',function(req,res,next){
   if(devInfo.firmwareInfo.timestamp != '201702160630')
   { 
      
-    respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.FW_UPDATE,fwUrl,0);
+    respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.CONFIG_UPDATE,newConfigString,0);
     res.json(respJson);
     return;
   }

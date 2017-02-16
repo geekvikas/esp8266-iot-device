@@ -15,8 +15,8 @@ app.post('/',function(req,res,next){
     var respJson = {};
     var devInfo = deviceManager.GetDeviceInfo(req);
     console.log(devInfo);
-    var fwUrl = 'http://10.0.0.221:3000/fw.bin';
-    var newConfig = {AP_NAME:"Eshanya",AP_KEY:"eshanyaverma",EP_URL:"http://172.20.10.4:3000/api/v1/device"};
+    var fwUrl = 'http://dev.idnno.com/fw.bin';
+    var newConfig = {AP_NAME:"Eshanya",AP_KEY:"eshanyaverma",EP_URL:"http://dev.idnno.com/api/v1/device"};
     var newConfigString = JSON.stringify(newConfig);
     
     if(devInfo.firmwareInfo.timestamp != '201702130200')
