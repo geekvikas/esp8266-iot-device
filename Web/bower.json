@@ -30,6 +30,6 @@
     "angular-sanitize": "^1.6.1",
     "please-wait": "^0.0.5",
     "bootstrap": "^3.3.7",
-    "bootstrap-select": "^1.12.2",
+    "bootstrap-select": "^1.12.2"
   }
 }
