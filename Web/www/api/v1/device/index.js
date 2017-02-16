@@ -79,16 +79,17 @@ app.post('/',function(req,res,next){
   
   var respJson = {};
   var devInfo = deviceManager.GetDeviceInfo(req);
-  console.log("Request Type: " + devInfo.message.type);
+  console.log("Request Type: " + devInfo.message.type + ' , Timestamp: ' + devInfo.firmwareInfo.timestamp + ' , FW Version: ' + devInfo.firmwareInfo.version);
   var fwUrl = 'https://dev.idnno.com/fw.bin';
   var newConfig = {EP_URL:"https://dev.idnno.com/api/v1/device"};
   var newConfigString = JSON.stringify(newConfig);
 
   var status = "error";
   var device = new Device();
-
+  
   if(devInfo.firmwareInfo.timestamp != '201702160630')
-  {  
+  { 
+     
     respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.FW_UPDATE,fwUrl,0);
     res.json(respJson);
     return;
