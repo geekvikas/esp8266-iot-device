@@ -13,7 +13,7 @@ var mongoDBServer = process.env.DB_PORT_27017_TCP_ADDR   || 'localhost';
 var mongoDBPort = process.env.DB_PORT_27017_TCP_PORT || '27017';
 var mongoDBName = process.env.DB_NAME || 'ioled';
 
-var mongoDBConnectionString = 'mongodb://' + mongoDBServer + '/' + mongoDBName;
+var mongoDBConnectionString = 'mongodb://' + mongoDBServer + ':' + mongoDBPort + '/' + mongoDBName;
 
 
 // view engine setup
