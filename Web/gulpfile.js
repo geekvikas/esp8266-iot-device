@@ -90,7 +90,7 @@ gulp.task('copy-js-libs', function() {
                         config.bowerDir + '/angular-resource/angular-resource.min.js',
                         config.bowerDir + '/angular-animate/angular-animate.min.js',
                         config.bowerDir + '/angular-filter/dist/angular-filter.min.js',
-                        config.bowerDir + '/angularJS-toaster/toaster.min.js',
+                        config.bowerDir + '/angularjs-toaster/toaster.min.js',
                         ])
         .pipe(sourcemaps.init())
         .pipe(concat('angular-bundle.min.js',{newLine: '\n\n/* ----- FILE   SEPERATOR ----- */\n\n'}))

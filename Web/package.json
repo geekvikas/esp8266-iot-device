@@ -7,7 +7,6 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "angularjs-toaster": "^2.1.0",
     "body-parser": "^1.8.2",
     "bower": "^1.7.9",
     "cookie-parser": "^1.4.3",
@@ -17,7 +16,6 @@
     "mongoose": "^4.7.4",
     "morgan": "^1.1.1",
     "multer": "^1.2.1",
-    "ngprogress": "^1.1.1",
     "nodemailer": "^2.5.0",
     "nodemon": "^1.9.2",
     "pug": "^2.0.0-beta11",
