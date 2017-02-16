@@ -1,10 +1,11 @@
 var express = require('express');
 var app = module.exports = express();
 var deviceManager = require(global.appRoot + '/lib/deviceManager');
+var path = require('path');
 
 /* Update all clients to redirect their requests to the API Server instead of web*/
 app.get('/update/binary',function(req,res,next){
-    res.redirect("/fw.bin");
+    res.sendFile(path.join(__dirname,"../../public/fw.bin"));
 });
 
 
