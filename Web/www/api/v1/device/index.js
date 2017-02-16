@@ -89,8 +89,7 @@ app.post('/',function(req,res,next){
   
   if(devInfo.firmwareInfo.timestamp != '201702160630')
   { 
-     
-    respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.CONFIG_UPDATE,newConfigString,0);
+    respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.FW_UPDATE,fwUrl,0);
     res.json(respJson);
     return;
   }
