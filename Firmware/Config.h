@@ -28,7 +28,7 @@ public:
     
     String DEFAULT_AP_NAME = "$DEVICE_DISCOVERY$";
     String DEFAULT_AP_KEY = "admin@12345";
-    String DEFAULT_EP_URL = "http://172.20.10.4:3000/";
+    String DEFAULT_EP_URL = "https://dev.idnno.com/";
     static Config *Instance()
     {
           if (!s_instance)
