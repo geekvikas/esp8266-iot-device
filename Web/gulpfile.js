@@ -35,7 +35,7 @@ gulp.task('build-fonts', function() {
 
 gulp.task('build-css', function() {
     gulp.src([ 
-                    config.bowerDir + '/AngularJS-Toaster/toaster.css',
+                    config.bowerDir + '/angularjs-toaster/toaster.css',
                     config.bowerDir + '/angular-ui-select/dist/select.css',
                 ])
     .pipe(clean())
