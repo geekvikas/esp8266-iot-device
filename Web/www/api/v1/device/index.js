@@ -80,14 +80,14 @@ app.post('/',function(req,res,next){
   var respJson = {};
   var devInfo = deviceManager.GetDeviceInfo(req);
   console.log("Request Type: " + devInfo.message.type);
-  var fwUrl = 'http://10.0.0.221:3000/fw.bin';
-  var newConfig = {EP_URL:"http://10.0.0.221:3000/api/v1/device"};
+  var fwUrl = 'https://dev.idnno.com/fw.bin';
+  var newConfig = {EP_URL:"https://dev.idnno.com/api/v1/device"};
   var newConfigString = JSON.stringify(newConfig);
 
   var status = "error";
   var device = new Device();
 
-  if(devInfo.firmwareInfo.timestamp != '201702130200')
+  if(devInfo.firmwareInfo.timestamp != '201702160630')
   {  
     respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.FW_UPDATE,fwUrl,0);
     res.json(respJson);
@@ -129,7 +129,7 @@ app.post('/',function(req,res,next){
     //Check if device is still registered in the database
     Device.find({'deviceInfo.chipId':devInfo.deviceInfo.chipId}, function(err,device){
       if(!err && Object.keys(device).length==1 && device[0].deviceInfo.chipId == devInfo.deviceInfo.chipId){
-        respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.NOP);
+        respJson = deviceManager.GenerateMessage("success",deviceManager.TASK.LED,"110110110110",200);
       }
       else{
         // If device is not registered then force re-registration by sending REG_INVALID response
