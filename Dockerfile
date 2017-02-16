@@ -11,9 +11,8 @@ COPY ./Web /usr/src/app
 # Install app dependencies & run Gulp tasks
 
 RUN \
-    npm install bower -g && \
-    npm install gulp -g && \
-	npm install && \
+    npm install bower gulp -g && \
+    npm install && \
 	bower install --allow-root && \
 	gulp
 
