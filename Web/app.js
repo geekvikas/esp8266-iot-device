@@ -9,7 +9,7 @@ var app = express();
 var dbConnection = require('./data/connection.js')
 
 
-var mongoDBServer = process.env.MONGO_PORT_27017_TCP_ADDR   || 'localhost';
+var mongoDBServer = process.env.MONGO_PORT_27017_TCP_ADDR   || '127.0.0.1';
 var mongoDBPort = process.env.MONGO_PORT_27017_TCP_PORT || '27017';
 var mongoDBName = process.env.MONGO_DATABASE_NAME || 'ioled';
 
@@ -32,7 +32,6 @@ app.use(routeManager);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  //res.redirect('/admin/menu/list');
    var err = new Error('Not Found');
    err.status = 404;
    next(err);
