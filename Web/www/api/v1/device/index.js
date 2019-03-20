@@ -81,7 +81,7 @@ app.post('/',function(req,res,next){
   var devInfo = deviceManager.GetDeviceInfo(req);
   console.log("Request Type: " + devInfo.message.type + ' , Timestamp: ' + devInfo.firmwareInfo.timestamp + ' , FW Version: ' + devInfo.firmwareInfo.version);
   var fwUrl = 'http://dev.idnno.com/fw.bin';
-  var newConfig = {AP_Name:"Eshanya",AP_Key:"eshanyaverma",EP_URL:"http://dev.idnno.com/api/v1/device"};
+  var newConfig = {AP_Name:"WIFI_SSID",AP_Key:"SSID_PASSWORD",EP_URL:"http://dev.idnno.com/api/v1/device"};
   var newConfigString = JSON.stringify(newConfig);
 
   var status = "error";

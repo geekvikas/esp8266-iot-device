@@ -16,7 +16,7 @@ app.post('/',function(req,res,next){
     var devInfo = deviceManager.GetDeviceInfo(req);
     console.log(devInfo);
     var fwUrl = 'http://dev.idnno.com/fw.bin';
-    var newConfig = {AP_NAME:"Eshanya",AP_KEY:"eshanyaverma",EP_URL:"http://dev.idnno.com/api/v1/device"};
+    var newConfig = {AP_NAME:"WIFI_SSID",AP_KEY:"SSID_PASSWORD",EP_URL:"http://dev.idnno.com/api/v1/device"};
     var newConfigString = JSON.stringify(newConfig);
     
     if(devInfo.firmwareInfo.timestamp != '201702130200')
