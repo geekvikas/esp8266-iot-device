@@ -6,7 +6,8 @@ A simple Single LED based device that display different pattern of LED depending
 1) If no "device.json" is present then boot up and try to connect to default WiFi  (Phone based WiFi Hotspot) - credentials: "$DEVICE_DISCOVERY$" "admin@12345"
 3) Go to https://whoami.idnno.com/ to download "device.json"
 4) device.json contains following information
-{
+
+`{
 	"fingerprint": "KADSHJSJHSJDHSJDBKJSDSKD==",
 	"epochUtc": "1352716800",
 	"wifiConfig": [
@@ -49,7 +50,7 @@ A simple Single LED based device that display different pattern of LED depending
 			"interval": 0
 		}
 	}
-}
+}`
 5) Connect to WiFi from the Config file
 6) Update the device Time from the epochUtc
 7) Send a heartbeat and update the status of device in Dashboard
