@@ -9,7 +9,7 @@ var app = express();
 var dbConnection = require('./data/connection.js')
 
 
-var mongoDBServer = process.env.MONGO_PORT_27017_TCP_ADDR   || '127.0.0.1';
+var mongoDBServer = process.env.MONGO_PORT_27017_TCP_ADDR   || 'grub.desi';
 var mongoDBPort = process.env.MONGO_PORT_27017_TCP_PORT || '27017';
 var mongoDBName = process.env.MONGO_DATABASE_NAME || 'ioled';
 

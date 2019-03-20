@@ -12,7 +12,7 @@ class Config {
     
 /*
 Sample JSON Config file
-{"AP_NAME":"Eshanya","AP_KEY":"Eshanya2013","EP_URL":"http://10.0.0.221"}
+{"AP_NAME":"SSID_HERE","AP_KEY":"Super_Secret_Password_Here","EP_URL":"http://XXX.YYY.ZZZ.AAA:3000/"}
 
 */
 private:
