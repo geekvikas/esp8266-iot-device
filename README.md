@@ -2,10 +2,10 @@
 A simple Single LED based device that display different pattern of LED depending upon the command received from central server
 
 # Boot Process
-1) Look for "device.json" and connect to WiFi
-1) If no "device.json" is present then boot up and try to connect to default WiFi  (Phone based WiFi Hotspot) - credentials: "$DEVICE_DISCOVERY$" "admin@12345"
-3) Go to https://whoami.idnno.com/ to download "device.json"
-4) device.json contains following information
+1. Look for "device.json" and connect to WiFi
+2. If no "device.json" is present then boot up and try to connect to default WiFi  (Phone based WiFi Hotspot) - credentials: "$DEVICE_DISCOVERY$" "admin@12345"
+3. Go to https://whoami.idnno.com/ to download "device.json"
+4. device.json contains following information
 
 `{
 	"fingerprint": "KADSHJSJHSJDHSJDBKJSDSKD==",
@@ -51,10 +51,11 @@ A simple Single LED based device that display different pattern of LED depending
 		}
 	}
 }`
-5) Connect to WiFi from the Config file
-6) Update the device Time from the epochUtc
-7) Send a heartbeat and update the status of device in Dashboard
-8) Check for FW Update
-9) If required, update the FW and reboot, go to Step 1 again
-10) Call the lightStatus and change the light accordingly, sleep for the interval in heartbeat
-11) go to Step 6
+
+5. Connect to WiFi from the Config file
+6. Update the device Time from the epochUtc
+7. Send a heartbeat and update the status of device in Dashboard
+8. Check for FW Update
+9. If required, update the FW and reboot, go to Step 1 again
+10. Call the lightStatus and change the light accordingly, sleep for the interval in heartbeat
+11. go to Step 6
