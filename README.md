@@ -33,9 +33,11 @@ enum TASK{
 
 
 # Boot Process
-1. Look for "device.json" and connect to WiFi
-2. If no "device.json" is present then boot up and try to connect to default WiFi  (Phone based WiFi Hotspot) - credentials: "$DEVICE_DISCOVERY$" "admin@12345"
-3. Go to https://whoami.idnno.com/ to download "device.json"
+1. Look for *default.config* and connect to WiFi
+2. If no *default.config* is present then boot up and try to connect to default WiFi 
+	* SSID : `$DEVICE_DISCOVERY$`
+	* Pass : `admin@12345`
+3. Go to *http://dev.idnno.com/api/v1/device* to download *default.config*
 4. device.json contains following information
 ```
 {
