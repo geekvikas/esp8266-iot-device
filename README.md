@@ -41,9 +41,11 @@ enum TASK{
 4. *default.config* contains following information
 ```
 {
-	"AP_NAME":"SSID_HERE","AP_KEY":"Super_Secret_Password_Here","EP_URL":"http://XXX.YYY.ZZZ.AAA:3000/"
+	"AP_NAME":"SSID_HERE",
+	"AP_KEY":"Super_Secret_Password_Here",
+	"EP_URL":"http://XXX.YYY.ZZZ.AAA:3000/"
 }
-  ```
+```
 
 5. Connect to WiFi from the Config file
 6. Update the device Time from the epochUtc
