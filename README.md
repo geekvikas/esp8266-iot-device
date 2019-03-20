@@ -38,51 +38,11 @@ enum TASK{
 	* SSID : `$DEVICE_DISCOVERY$`
 	* Pass : `admin@12345`
 3. Go to *http://dev.idnno.com/api/v1/device* to download *default.config*
-4. device.json contains following information
+4. *default.config* contains following information
 ```
 {
-	"fingerprint": "KADSHJSJHSJDHSJDBKJSDSKD==",
-	"epochUtc": "1352716800",
-	"wifiConfig": [
-		{
-			"ssid": "ssid_1",
-			"password": "password_1"
-		},
-		{
-			"ssid": "ssid_2",
-			"password": "password_2"
-		},
-		{
-			"ssid": "ssid_3",
-			"password": "password_3"
-		},
-		{
-			"ssid": "ssid_4",
-			"password": "password_4"
-		},
-		{
-			"ssid": "ssid_5",
-			"password": "password_5"
-		}
-	],
-	"commands": {
-		"heartbeat": {
-			"url": "https://dev.idnno.com/heartbeat",
-			"interval": 10000
-		},
-		"lightStatus": {
-			"url": "https://dev.idnno.com/getLightStatus",
-			"interval": 10000
-		},
-		"firmwareCheck": {
-			"url": "https://fw.idnno.com/checkUpdate",
-			"interval": 14400
-		},
-		"firmwareUpdate": {
-			"url": "https://fw.idnno.com/getUpdate",
-			"interval": 0
-		}
-	}
+	"AP_NAME":"SSID_HERE","AP_KEY":"Super_Secret_Password_Here","EP_URL":"http://XXX.YYY.ZZZ.AAA:3000/"
+}
   ```
 
 5. Connect to WiFi from the Config file
